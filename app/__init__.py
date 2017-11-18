@@ -12,4 +12,4 @@ app.register_blueprint(home_module)
 
 #rainmachine
 app.register_blueprint(rainmachine_module)
-app.register_blueprint(purpleair)
+app.register_blueprint(purpleair_module)
