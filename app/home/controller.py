@@ -6,4 +6,4 @@ home_mod = Blueprint('home', __name__)
 @home_mod.route('/', methods = ['GET'])
 def home():
 	#return the template
-	return render_template("test.html")
+	return render_template("index.html")
