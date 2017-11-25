@@ -21,7 +21,11 @@ You're going to need:
 <p align="center">
    <img src="https://help.github.com/assets/images/help/branch/branch-selection-dropdown.png" width="400">
 </p>
-2. Clone your branch to your account using `git clone -b BRANCHNAME git@github.com:byutopia/Capstone.git` or `git clone -b BRANCHNAME https://github.com/byutopia/Capstone.git` if you are SSH-ed.
+2. Clone your branch to your account using
+
+```
+git clone -b BRANCHNAME git@github.com:byutopia/Capstone.git OR git clone -b BRANCHNAME https://github.com/byutopia/Capstone.git
+``` 
 3. `cd Capstone`
 4. Install Flask and the necessary requirements by using the command, `sudo pip install -r requirements.txt`
 5. Run the app using `./utopia.py` or `python utopia.py`
