@@ -1,6 +1,6 @@
 # Utopia Smart City Console
 <p align="center">
-   <img src="https://raw.githubusercontent.com/byutopia/Capstone/drofdarb/static/images/fiberlogowhite.jpg" style="width:200px;">
+   <img src="https://raw.githubusercontent.com/byutopia/Capstone/drofdarb/static/images/fiberlogowhite.jpg" width="200">
 </p>
 
 <p align="center"> Utopia Smart City Console is a Flask-operated app that interfaces with smart IoT devices to provide a proof of concept of a smart-city in action. </p>
