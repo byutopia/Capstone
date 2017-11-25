@@ -1,7 +1,7 @@
 {% extends "base_layout.html" %} {% block title %}Flot{% endblock %} 
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('serveStaticResource', resource='css/morris.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/morris.css') }}">
 {% endblock %} 
 {% block content %}
 
@@ -90,7 +90,7 @@
 {% endblock %}
 {% block js %}
     {{ super() }}
-    <script src="{{ url_for('serveStaticResource', resource='js/raphael-min.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/morris.min.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/morris-data.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/raphael-min.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/morris.min.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/morris-data.js')}}"></script>
 {% endblock %}

@@ -1,8 +1,8 @@
 {% extends "base_layout.html" %} {% block title %}Tables{% endblock %} 
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('serveStaticResource', resource='css/responsive.dataTables.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('serveStaticResource', resource='css/dataTables.bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/responsive.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/dataTables.bootstrap.css') }}">
 {% endblock %} 
 {% block content %}
 <div class="row">
@@ -743,8 +743,8 @@
 {% endblock %} 
 {% block js %}
 {{ super() }}
-<script src="{{ url_for('serveStaticResource', resource='js/jquery.dataTables.min.js')}}"></script>
-<script src="{{ url_for('serveStaticResource', resource='js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{ url_for('serve_static_resource', resource='js/jquery.dataTables.min.js')}}"></script>
+<script src="{{ url_for('serve_static_resource', resource='js/dataTables.bootstrap.min.js')}}"></script>
 <script>
 $(document).ready(function() {
     $('#dataTables-example').DataTable({
