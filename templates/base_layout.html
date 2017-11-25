@@ -9,10 +9,10 @@
     <meta name="description" content="">
     <meta name="author" content="Allenh">
     <title>{% block title %}{% endblock %} - Smart City Console</title>
-    <link rel="stylesheet" href="{{ url_for('serveStaticResource', resource='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('serveStaticResource', resource='css/metisMenu.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('serveStaticResource', resource='css/sb-admin-2.css') }}">
-    <link rel="stylesheet" href="{{ url_for('serveStaticResource', resource='css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/metisMenu.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/sb-admin-2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/font-awesome.min.css') }}">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -364,10 +364,10 @@
         </div>
     </div>
     {% block js %}
-    <script src="{{ url_for('serveStaticResource', resource='js/jquery.min.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/bootstrap.min.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/metisMenu.min.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/sb-admin-2.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/jquery.min.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/metisMenu.min.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/sb-admin-2.js')}}"></script>
     {% endblock %}
 </body>
 

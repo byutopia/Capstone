@@ -1,9 +1,9 @@
 {% extends "base_layout.html" %} {% block title %}Welcome{% endblock %} 
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('serveStaticResource', resource='css/timeline.css') }}">
-    <link rel="stylesheet" href="{{ url_for('serveStaticResource', resource='css/morris.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('serveStaticResource', resource='images/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/timeline.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/morris.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('serve_static_resource', resource='images/favicon.ico') }}">
 {% endblock %} 
 {% block content %}
 <div class="row">
@@ -301,7 +301,7 @@
 <!-- /.row -->{% endblock %}
 {% block js %}
     {{ super() }}
-    <script src="{{ url_for('serveStaticResource', resource='js/raphael-min.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/morris.min.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/morris-data.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/raphael-min.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/morris.min.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/morris-data.js')}}"></script>
 {% endblock %}

@@ -21,8 +21,8 @@ def admin(pagename):
     return render_template(pagename+'.html')
 
 @app.route('/<path:resource>')
-def serveStaticResource(resource):
-	return send_from_directory('static/', resource)
+def serve_static_resource(resource):
+    return send_from_directory('static/', resource)
 
 @app.errorhandler(jinja2.exceptions.TemplateNotFound)
 def template_not_found(e):

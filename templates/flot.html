@@ -1,8 +1,8 @@
 {% extends "base_layout.html" %} {% block title %}Flot{% endblock %} 
 {% block head %}
     {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('serveStaticResource', resource='css/timeline.css') }}">
-    <link rel="stylesheet" href="{{ url_for('serveStaticResource', resource='css/morris.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/timeline.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/morris.css') }}">
 {% endblock %} 
 {% block content %}
     <div class="row">
@@ -114,11 +114,11 @@
 {% endblock %}
 {% block js %}
     {{ super() }}
-    <script src="{{ url_for('serveStaticResource', resource='js/excanvas.min.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/jquery.flot.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/jquery.flot.pie.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/jquery.flot.resize.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/jquery.flot.time.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/jquery.flot.tooltip.min.js')}}"></script>
-    <script src="{{ url_for('serveStaticResource', resource='js/flot-data.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/excanvas.min.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/jquery.flot.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/jquery.flot.pie.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/jquery.flot.resize.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/jquery.flot.time.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/jquery.flot.tooltip.min.js')}}"></script>
+    <script src="{{ url_for('serve_static_resource', resource='js/flot-data.js')}}"></script>
 {% endblock %}
