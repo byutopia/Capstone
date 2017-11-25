@@ -19,7 +19,7 @@ You're going to need:
 ### Getting Set Up
 1. Make your branch on GitHub if you haven't. You can do so by navigating to the git and using the branch dropdown menu.
 <p align="center">
-   <img src="https://help.github.com/assets/images/help/branch/branch-selection-dropdown.png">
+   <img src="https://help.github.com/assets/images/help/branch/branch-selection-dropdown.png" width="400">
 </p>
 2. Clone your branch to your account using `git clone -b BRANCHNAME git@github.com:byutopia/Capstone.git` or `git clone -b BRANCHNAME https://github.com/byutopia/Capstone.git` if you are SSH-ed.
 3. `cd Capstone`
