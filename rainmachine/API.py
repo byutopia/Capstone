@@ -12,7 +12,7 @@ class API:
     init = False
 
     # Have to use a session because Rainmachine uses a cookie to authenticate
-    rm = requests.Session()
+    session = requests.Session()
 
     def __init__(self):
         self.init = self.auth()
@@ -27,9 +27,9 @@ class API:
             }
         }'''
 
-        r = self.rm.post("https://my.rainmachine.com/login/auth", data=data, headers={"Content-Type": "application/json"})
+        req = self.session.post("https://my.rainmachine.com/login/auth", data=data, headers={"Content-Type": "application/json"})
         try:
-            res = r.json()
+            res = req.json()
             if res['errorType'] == 0:
                 self.access_token = res['access_token']
                 self.sid = res['sprinklerId']
@@ -44,19 +44,19 @@ class API:
     def get(self, endpoint):
         url = self.URL.format(self.sid, endpoint, self.access_token)
 
-        r = self.rm.get(url)
+        req = self.session.get(url)
 
         try:
-            return {"error": 0, "result": r.json()}
+            return {"error": 0, "result": req.json()}
         except ValueError:
             return {"error": 3, "message": "Error reading received JSON object"}
 
     def post(self, endpoint, data=None):
         url = self.URL.format(self.sid, endpoint, self.access_token)
 
-        r = self.rm.get(url, data=data)
+        req = self.session.get(url, data=data)
 
         try:
-            return {"error": 0, "result": r.json()}
+            return {"error": 0, "result": req.json()}
         except ValueError:
             return {"error": 4, "message": "Error reading received JSON object"}
