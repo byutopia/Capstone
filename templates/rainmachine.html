@@ -1,1 +1,19 @@
-rainmachine!
+<!doctype html>
+<title>Rainmachine</title>
+<h1>Programs</h1>
+<table>
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>Active</th>
+		<th>Start Time</th>
+	</tr>
+{% for p in programs %}
+	<tr>
+		<td>{{ p.uid|e }}</td>
+		<td>{{ p.name|e }}</td>
+		<td>{{ p.active|e }}</td>
+		<td>{{ p.startTime|e }}</td>
+	</tr>
+{% endfor %}
+</table>
