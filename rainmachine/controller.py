@@ -14,7 +14,7 @@ def rainmachine():
     if api.init['error'] != 0:
         return api.init['message']
     try:
-        req = api.get("api/4/program")
+        req = api.get("program")
         if req['error'] != 0:
             return req['message']
         else:

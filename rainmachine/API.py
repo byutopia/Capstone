@@ -4,9 +4,10 @@ class API:
     
     access_token = False
     sid = False
-    URL = "https://my.rainmachine.com/s/{}/{}?access_token={}"
+    #URL = "https://my.rainmachine.com/s/{}/{}?access_token={}"
+    URL = "https://10.10.106.71:8080/api/4/{}?access_token={}"
 
-    email = "anna.zaitzeff@gmail.com"
+    email = "salsahonor@gmail.com"
     pwd = "strong password"
 
     init = False
@@ -19,20 +20,25 @@ class API:
         
     # Function to get access token and cookie immediatley
     def auth(self):
+        #data = '''{
+        #    "user": {
+        #        "email": "anna.zaitzeff@gmail.com",
+        #        "pwd": "strong password",
+        #        "remember": false
+        #    }
+        #}'''
         data = '''{
-            "user": {
-                "email": "anna.zaitzeff@gmail.com",
-                "pwd": "strong password",
-                "remember": false
-            }
+            "pwd": "strong password",
+            "remember": 0
         }'''
 
-        req = self.session.post("https://my.rainmachine.com/login/auth", data=data, headers={"Content-Type": "application/json"})
+        #req = self.session.post("https://my.rainmachine.com/login/auth", data=data, headers={"Content-Type": "application/json"})
+        req = self.session.post("https://10.10.106.71:8080/api/4/auth/login", data=data, headers={"Content-Type": "application/json"}, verify=False)
         try:
             res = req.json()
-            if res['errorType'] == 0:
+            if res["statusCode"] == 0:
                 self.access_token = res['access_token']
-                self.sid = res['sprinklerId']
+                #self.sid = res['sprinklerId']
                 return {"error": 0, "message": "success"}
             else:
                 return {"error": 1, "message": "Error authenticating with Rainmachine API"}
@@ -42,7 +48,8 @@ class API:
     # Since we need the cookie to work, just handle all Rainmachine API calls
     # through this class instead of the controller
     def get(self, endpoint):
-        url = self.URL.format(self.sid, endpoint, self.access_token)
+        #url = self.URL.format(self.sid, endpoint, self.access_token)
+        url = self.URL.format(endpoint, self.access_token)
 
         req = self.session.get(url)
 
@@ -52,7 +59,8 @@ class API:
             return {"error": 3, "message": "Error reading received JSON object"}
 
     def post(self, endpoint, data=None):
-        url = self.URL.format(self.sid, endpoint, self.access_token)
+        #url = self.URL.format(self.sid, endpoint, self.access_token)
+        url = self.URL.format(endpoint, self.access_token)
 
         req = self.session.get(url, data=data)
 
