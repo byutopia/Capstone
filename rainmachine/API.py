@@ -5,7 +5,8 @@ class API:
     access_token = False
     sid = False
     #URL = "https://my.rainmachine.com/s/{}/{}?access_token={}"
-    URL = "https://10.10.106.71:8080/api/4/{}?access_token={}"
+    URI = "10.10.106.71:8080"
+    URL = "https://{}/api/4/{}?access_token={}"
 
     email = "salsahonor@gmail.com"
     pwd = "strong password"
@@ -33,7 +34,7 @@ class API:
         }'''
 
         #req = self.session.post("https://my.rainmachine.com/login/auth", data=data, headers={"Content-Type": "application/json"})
-        req = self.session.post("https://10.10.106.71:8080/api/4/auth/login", data=data, headers={"Content-Type": "application/json"}, verify=False)
+        req = self.session.post("https://{}/api/4/auth/login".format(self.URI), data=data, headers={"Content-Type": "application/json"}, verify=False)
         try:
             res = req.json()
             if res["statusCode"] == 0:
@@ -49,7 +50,7 @@ class API:
     # through this class instead of the controller
     def get(self, endpoint):
         #url = self.URL.format(self.sid, endpoint, self.access_token)
-        url = self.URL.format(endpoint, self.access_token)
+        url = self.URL.format(self.URI, endpoint, self.access_token)
 
         req = self.session.get(url)
 
@@ -60,7 +61,7 @@ class API:
 
     def post(self, endpoint, data=None):
         #url = self.URL.format(self.sid, endpoint, self.access_token)
-        url = self.URL.format(endpoint, self.access_token)
+        url = self.URL.format(self.URI, endpoint, self.access_token)
 
         req = self.session.get(url, data=data)
 
