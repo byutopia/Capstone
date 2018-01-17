@@ -1,5 +1,5 @@
 import requests
-
+requests.adapters.DEFAULT_RETRIES = 2
 class API:
     
     access_token = False
@@ -34,8 +34,8 @@ class API:
         }'''
 
         #req = self.session.post("https://my.rainmachine.com/login/auth", data=data, headers={"Content-Type": "application/json"})
-        req = self.session.post("https://{}/api/4/auth/login".format(self.URI), data=data, headers={"Content-Type": "application/json"}, verify=False)
         try:
+	    req = self.session.post("https://{}/api/4/auth/login".format(self.URI), data=data, headers={"Content-Type": "application/json"}, verify=False)
             res = req.json()
             if res["statusCode"] == 0:
                 self.access_token = res['access_token']
@@ -43,7 +43,7 @@ class API:
                 return {"error": 0, "message": "success"}
             else:
                 return {"error": 1, "message": "Error authenticating with Rainmachine API"}
-        except ValueError:
+        except requests.exceptions.RequestException:
             return {"error": 2, "message": "Error reading received JSON object"}
 
     # Since we need the cookie to work, just handle all Rainmachine API calls
