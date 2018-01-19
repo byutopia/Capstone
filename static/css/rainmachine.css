@@ -1,0 +1,45 @@
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    width: 25rem;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+/* Add some padding inside the card container */
+.raintainer {
+    padding: 2px 16px;
+}
+
+img {
+    border-radius: 5px 5px 0 0;
+    width: 250px;
+    height: auto;
+}
+button.onOff{
+	border-radius: 4px;
+	border: none;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+div.status{
+	/*border-radius: 4px;*/
+	border: none;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    /*cursor: pointer;*/
+    width: 21.5rem;
+}
