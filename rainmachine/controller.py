@@ -14,13 +14,14 @@ def rainmachine():
     if api.init['error'] != 0:
         return api.init['message']
     try:
-        req = api.get("program")
+        #req = api.get("program")
+        req = api.get("zone")
         if req['error'] != 0:
             return req['message']
         else:
             res = req['result']
             # return the template
-            return render_template("rainmachine.html", programs=res['programs'])
+            return render_template("rainmachine.html", zones=res['zones'])
     except ValueError:
         return "Error reading API response"
 
@@ -37,4 +38,3 @@ def diag():
             return res['result']
     except ValueError:
         return "Error reading API response"
-

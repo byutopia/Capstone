@@ -7,25 +7,19 @@
 
 <!doctype html>
 <title>Rainmachine</title>
+<link rel="stylesheet" type="text/css" href="css/rainmachine.css">
 <h3>Programs</h3>
 
-
-<div class="table-responsive">
-<table class="table table-bordered table-hover table-striped" >
-	<tr>
-		<th>ID</th>
-		<th>Program Name</th>
-		<th>Active</th>
-		<th>Start Time</th>
-	</tr>
-{% for p in programs %}
-	<tr>
-		<td>{{ p.uid|e }}</td>
-		<td>{{ p.name|e }}</td>
-		<td>{{ p.active|e }}</td>
-		<td>{{ p.startTime|e }}</td>
-	</tr>
-{% endfor %}
-</table>
+{% for z in zones %}
+<div class="card">
+<div class="raintainer">
+<h4><b>{{ z.name|e }}</b></h4> <!-- ZONES here -->
+<p>description is gonna go here</p> <!-- Description-->
+<div class="status" style="background-color: #3D8BCD;">{{ z.state|e }}</div><br>
+<div class="status" style="background-color: #0964B2;">{{ z.area|e }}</div><br>
+<button class="onOff" style="background-color: #8FC470;">start</button>
+<button class="onOff" style="background-color: #DB524C;">stop</button>
 </div>
+</div>
+{% endfor %}
 {% endblock %}
