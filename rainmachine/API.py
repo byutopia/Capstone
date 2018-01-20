@@ -1,7 +1,7 @@
 import requests
 requests.adapters.DEFAULT_RETRIES = 2
 class API:
-    
+
     access_token = False
     sid = False
     #URL = "https://my.rainmachine.com/s/{}/{}?access_token={}"
@@ -18,7 +18,7 @@ class API:
 
     def __init__(self):
         self.init = self.auth()
-        
+
     # Function to get access token and cookie immediatley
     def auth(self):
         #data = '''{
@@ -43,9 +43,10 @@ class API:
                 return {"error": 0, "message": "success"}
             else:
                 return {"error": 1, "message": "Error authenticating with Rainmachine API"}
-        except requests.exceptions.RequestException:
+        except ValueError:
             return {"error": 2, "message": "Error reading received JSON object"}
-
+        except requests.exceptions.RequestException:
+            return {"error": 3, "message": "Error connecting to Rainmachine"}
     # Since we need the cookie to work, just handle all Rainmachine API calls
     # through this class instead of the controller
     def get(self, endpoint):
