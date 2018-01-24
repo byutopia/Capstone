@@ -13,7 +13,9 @@
 <!-- rainmachineInfo.zones.zones -->
 {% for z in rainmachineInfo.zone.zones %}
 <div class="card">
+  <img class="center" src="images/grass.jpg" alt="grass">
 	<div class="raintainer">
+
 		<h4><b>{{ z.name|e }}</b></h4> <!-- ZONES here -->
 
 		<p>Vegetation Type: {% if z.type == 2 %} Grass {% elif z.type == 3  %} Fruit Trees {% elif z.type == 4 %} Flowers {% elif z.type == 5 %} Vegetables {% elif z.type == 6 %} Citrus {% else %} Bushes{% endif %}</p>
