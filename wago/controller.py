@@ -12,7 +12,4 @@ def wago():
         wago_hit = True
         return 'ok'
     else:
-        if wago_hit:
-            return 'Wago successfully hit me!'
-        else:
-            return 'Nothing yet...'
+        return render_template("wago.html", data={'status': wago_hit})
