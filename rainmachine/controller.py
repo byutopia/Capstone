@@ -15,13 +15,32 @@ def rainmachine():
         return api.init['message']
     try:
         #req = api.get("program")
+        data ={}
+        req = api.get("program")
+        if req['error'] != 0:
+            return req['message']
+        else:
+            data['program'] = req['result']
+
         req = api.get("zone")
         if req['error'] != 0:
             return req['message']
         else:
-            res = req['result']
-            # return the template
-            return render_template("rainmachine.html", zones=res['zones'])
+            data['zone'] = req['result']
+
+        req = api.get("zone/properties")
+        if req['error'] != 0:
+            return req['message']
+        else:
+            data['properties'] = req['result']
+
+        req = api.get("mixer")
+        if req['error'] != 0:
+            return req['message']
+        else:
+            data['mixer'] = req['result']
+            return render_template("rainmachine.html", rainmachineInfo = data)
+
     except ValueError:
         return "Error reading API response"
 

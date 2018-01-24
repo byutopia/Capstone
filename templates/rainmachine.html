@@ -8,18 +8,47 @@
 <!doctype html>
 <title>Rainmachine</title>
 <link rel="stylesheet" type="text/css" href="css/rainmachine.css">
-<h3>Programs</h3>
-
-{% for z in zones %}
+<h3>Zones</h3>
+<!-- rainmachineInfo.programs.programs -->
+<!-- rainmachineInfo.zones.zones -->
+{% for z in rainmachineInfo.zone.zones %}
 <div class="card">
-<div class="raintainer">
-<h4><b>{{ z.name|e }}</b></h4> <!-- ZONES here -->
-<p>description is gonna go here</p> <!-- Description-->
-<div class="status" style="background-color: #3D8BCD;">{{ z.state|e }}</div><br>
-<div class="status" style="background-color: #0964B2;">{{ z.area|e }}</div><br>
-<button class="onOff" style="background-color: #8FC470;">start</button>
-<button class="onOff" style="background-color: #DB524C;">stop</button>
+	<div class="raintainer">
+		<h4><b>{{ z.name|e }}</b></h4> <!-- ZONES here -->
+
+		<p>Vegetation Type: {% if z.type == 2 %} Grass {% elif z.type == 3  %} Fruit Trees {% elif z.type == 4 %} Flowers {% elif z.type == 5 %} Vegetables {% elif z.type == 6 %} Citrus {% else %} Bushes{% endif %}</p>
+
+		{% for p in rainmachineInfo.properties.zones %}
+    {% if z.uid == p.uid %}
+    <p>Soil Type:  {% if p.soil == 1 %} Clay Loam {% elif p.soil == 2  %} Silty Clay {% elif p.soil == 3 %} Clay {% elif p.soil == 4 %} Loam {% elif p.soil == 5 %} Sandy Loam {% elif p.soil == 6 %} Loamy Sand {% elif p.soil == 7 %} Sand {% elif p.soil == 8 %} Sandy Clay {% elif p.soil == 9 %} Silt Loam {% elif p.soil == 10 %} Silt {% else %} Not specified {% endif %}  </p>
+    <p>Sun Exposure: {% if p.sun == 1 %} Full Sun  {% elif p.sun == 2 %} Partial Shade {% elif p.sun == 3 %} Full Shade {% else %} Not specified {% endif %}</p>
+    {% endif %}
+    {% endfor %}
+
+		<div class="status" style="background-color: #3D8BCD;">Running: {% if z.state == 0 %} No {% else %} Yes{% endif %}</div><br>
+		<div class="status" style="background-color: #0964B2;">Time Left in Cycle: {{ z.remaining|e }}</div><br>
+		<button class="onOff" style="background-color: #8FC470;">start</button>
+		<button class="onOff" style="background-color: #DB524C;">stop</button>
 </div>
 </div>
 {% endfor %}
+<br>
+<br>
+<h3>Programs</h3>
+<table>
+  <tr style="background-color:#0964B2">
+    <th>Name</th>
+    <th>Status</th>
+    <th>Start Time</th>
+    <th>Zones in Program</th>
+  </tr>
+{% for p in rainmachineInfo.program.programs %}
+  <tr>
+    <td>{{ p.name|e }}</td>
+    <td>{% if p.status == 0 %} Not Running {%elif p.status == 1%} Running {% else %} Broken{%endif%}</td>
+    <td>{{ p.startTime|e }}</td>
+    <td>{% for n in p.wateringTimes %} {%if n.active == true%} {{n.name|e}} <div>{% else %} {% endif %}{% endfor %}</td>
+  </tr>
+{% endfor %}
+</table>
 {% endblock %}

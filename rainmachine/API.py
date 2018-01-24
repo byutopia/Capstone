@@ -5,7 +5,7 @@ class API:
     access_token = False
     sid = False
     #URL = "https://my.rainmachine.com/s/{}/{}?access_token={}"
-    URI = "10.10.108.144:8080"
+    URI = "10.10.104.231:8080"
     URL = "https://{}/api/4/{}?access_token={}"
 
     email = "salsahonor@gmail.com"
