@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+
 from flask import Flask, url_for, render_template, send_from_directory
 import jinja2.exceptions
 from rainmachine.controller import rainmachine_mod as rainmachine_module
 from purpleair.controller import purpleair_mod as purpleair_module
+from wago.controller import wago_mod as wago_module
 
 app = Flask(__name__)
 @app.route('/')
@@ -15,6 +17,7 @@ def index():
 #rainmachine
 app.register_blueprint(rainmachine_module)
 app.register_blueprint(purpleair_module)
+app.register_blueprint(wago_module)
 
 @app.route('/<pagename>')
 def admin(pagename):
