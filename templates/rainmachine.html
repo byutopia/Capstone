@@ -13,7 +13,7 @@
 <!-- rainmachineInfo.zones.zones -->
 {% for z in rainmachineInfo.zone.zones %}
 <div class="card">
-  <img class="center" src="images/grass.jpg" alt="grass">
+  <img class="center" src="images/{{z.uid|e}}.jpg" alt="grass">
 	<div class="raintainer">
 
 		<h4><b>{{ z.name|e }}</b></h4> <!-- ZONES here -->
