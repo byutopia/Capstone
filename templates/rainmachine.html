@@ -28,7 +28,7 @@
     {% endfor %}
 
 		<div class="status" style="background-color: #3D8BCD;">Running: {% if z.state == 0 %} No {% else %} Yes{% endif %}</div><br>
-		<div class="status" style="background-color: #0964B2;">Time Left in Cycle: {{ z.remaining|e }}</div><br>
+		<div class="status" style="background-color: #0964B2;">Time Left in Cycle: {{ z.remaining|e }} sec.</div><br>
 		<button class="onOff" style="background-color: #8FC470;">start</button>
 		<button class="onOff" style="background-color: #DB524C;">stop</button>
 </div>
