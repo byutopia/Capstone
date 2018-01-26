@@ -2,11 +2,14 @@ certifi==2017.11.5
 chardet==3.0.4
 click==6.7
 Flask==0.12.2
+Flask-SocketIO==2.9.3
 idna==2.6
 itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
+python-engineio==2.0.2
+python-socketio==1.8.4
 requests==2.18.4
+six==1.11.0
 urllib3==1.22
 Werkzeug==0.12.2
-flask-socketio==2.9.3
