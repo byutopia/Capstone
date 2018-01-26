@@ -1,5 +1,7 @@
 import requests
+import urllib3
 requests.adapters.DEFAULT_RETRIES = 2
+requests.packages.urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 class API:
 
     access_token = False
