@@ -53,7 +53,7 @@ class API:
         #url = self.URL.format(self.sid, endpoint, self.access_token)
         url = self.URL.format(self.URI, endpoint, self.access_token)
 
-        req = self.session.get(url)
+        req = self.session.get(url, verify=False)
 
         try:
             return {"error": 0, "result": req.json()}
@@ -64,7 +64,7 @@ class API:
         #url = self.URL.format(self.sid, endpoint, self.access_token)
         url = self.URL.format(self.URI, endpoint, self.access_token)
 
-        req = self.session.get(url, data=data)
+        req = self.session.post(url, data=data, headers={"Content-Type": "application/json"}, verify=False)
 
         try:
             return {"error": 0, "result": req.json()}
