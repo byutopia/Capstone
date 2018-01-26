@@ -6,13 +6,15 @@
     width: 25rem;
     display: inline-block;
     border-radius: 5px;
+    margin-bottom: 10px !important;
+    margin-right: 10px;
+
 }
 
 /* Add some padding inside the card container */
 .raintainer {
     padding: 2px 16px;
 }
-
 img {
     border-radius: 5px 5px 0 0;
     width: 250px;
@@ -42,4 +44,16 @@ div.status{
     margin: 4px 2px;
     /*cursor: pointer;*/
     width: 21.5rem;
+}
+table {
+    width: 100%;
+}
+th, td {
+    border: 1px solid #3D8BCD;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #d8edff;
 }
