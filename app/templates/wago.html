@@ -1,0 +1,18 @@
+{% extends "base_layout.html" %} {% block title %} Wago {% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"> Wago </h1>
+
+<!doctype html>
+<title>Wago</title>
+<link rel="stylesheet" type="text/css" href="css/wago.css">
+<h3>City Lights</h3>
+
+<div class="status">{{ data.status | e }}</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.slim.js"></script>
+<script src="{{ url_for('serve_static_resource', resource='js/wago.js') }}"></script>
+
+{% endblock %}
