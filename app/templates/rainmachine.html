@@ -59,9 +59,9 @@
 
 		<div class="status" style="background-color: #0964B2;">Time Left in Cycle: {{ z.remaining|e }} sec.</div><br>
 
-    <button class="onOff" id="start" value="{{ z.uid }}" style="background-color: #8FC470;" onclick="start({{z.uid}})">start</button>
+    <button class="onOff" id="start" value="{{ z.uid }}" style="background-color: #8FC470;" onclick="zoneStart({{z.uid}})">start</button>
 
-    <button class="onOff" id="stop" value="{{ z.uid }}" style="background-color: #DB524C;" onclick="stop({{z.uid}})">stop</button>
+    <button class="onOff" id="stop" value="{{ z.uid }}" style="background-color: #DB524C;" onclick="zoneStop({{z.uid}})">stop</button>
 </div>
 </div>
 {% endfor %}
@@ -74,6 +74,7 @@
     <th>Status</th>
     <th>Start Time</th>
     <th>Zones in Program</th>
+    <th>Start/Stop</th>
   </tr>
 {% for p in rainmachineInfo.program.programs %}
   <tr>
@@ -81,6 +82,8 @@
     <td>{% if p.status == 0 %} Not Running {%elif p.status == 1%} Running {% else %} Broken{%endif%}</td>
     <td>{{ p.startTime|e }}</td>
     <td>{% for n in p.wateringTimes %} {%if n.active == true%} {{n.name|e}} <div>{% else %} {% endif %}{% endfor %}</td>
+    <td> <button class="onOff" id="start" value="{{ p.uid }}" style="background-color: #8FC470;" onclick="programStart({{p.uid}})">start</button>
+    <button class="onOff" id="stop" value="{{ p.uid }}" style="background-color: #DB524C;" onclick="programStop({{p.uid}})">stop</button></td>
   </tr>
 {% endfor %}
 </table>

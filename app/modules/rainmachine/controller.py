@@ -43,8 +43,8 @@ def rainmachine():
     except ValueError:
         return "Error reading API response"
 
-@rainmachine_mod.route('/rainmachine/start', methods = ['POST'])
-def start():
+@rainmachine_mod.route('/rainmachine/zstart', methods = ['POST'])
+def zstart():
     data = '{"time": 300}'
     zoneID = request.get_json()["id"]
     req = api.post("zone/{zoneID}/start".format(zoneID=zoneID), data)
@@ -54,8 +54,8 @@ def start():
     else:
         return json.dumps({'status': "failed"})
 
-@rainmachine_mod.route('/rainmachine/stop', methods = ['POST'])
-def stop():
+@rainmachine_mod.route('/rainmachine/zstop', methods = ['POST'])
+def zstop():
     zoneID = request.get_json()["id"]
     if api.post("zone/{zoneID}/stop".format(zoneID=zoneID)):
         # if req['error'] != 0:
@@ -63,6 +63,25 @@ def stop():
     else:
         return json.dumps({'status': "failed"})
 
+@rainmachine_mod.route('/rainmachine/pstart', methods = ['POST'])
+def pstart():
+    data = '{"time": 300}'
+    programID = request.get_json()["id"]
+    req = api.post("program/{programID}/start".format(programID=programID), data)
+    print req
+    if req:#['error'] != 0:
+        return json.dumps({'status': "ok"})
+    else:
+        return json.dumps({'status': "failed"})
+
+@rainmachine_mod.route('/rainmachine/pstop', methods = ['POST'])
+def pstop():
+    programID = request.get_json()["id"]
+    if api.post("program/{programID}/stop".format(programID=programID)):
+        # if req['error'] != 0:
+        return json.dumps({'status': "ok"})
+    else:
+        return json.dumps({'status': "failed"})
 
 @rainmachine_mod.route('/rainmachine/diag', methods = ['GET'])
 # get diagnostic info
