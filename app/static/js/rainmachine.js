@@ -1,3 +1,4 @@
+// the endpoint to start watering a zone, sends id to controller from template
 function zoneStart(id) {
 	var url = '/rainmachine/zstart';
 	var data = {id: id};
@@ -14,7 +15,7 @@ function zoneStart(id) {
 	console.log(id);
 }
 
-
+// the endpoint to stop watering a zone, sends id to controller from template
 function zoneStop(id) {
 	var url = '/rainmachine/zstop';
 	var data = {id: id};
@@ -31,6 +32,7 @@ function zoneStop(id) {
 	console.log(id);
 }
 
+// the endpoint to start watering a program, sends id to controller from template
 function programStart(id) {
 	var url = '/rainmachine/pstart';
 	var data = {id: id};
@@ -47,7 +49,7 @@ function programStart(id) {
 	console.log(id);
 }
 
-
+// the endpoint to stop watering a program, sends id to controller from template
 function programStop(id) {
 	var url = '/rainmachine/pstop';
 	var data = {id: id};
