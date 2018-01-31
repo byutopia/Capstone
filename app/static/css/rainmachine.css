@@ -45,15 +45,25 @@ div.status{
     /*cursor: pointer;*/
     width: 21.5rem;
 }
+div.grayed{
+    opacity: 0.3;
+}
+table.type {
+    width: 100%;
+    border: none;
+}
+th.type, td.type {
+    border: none;
+}
 table {
     width: 100%;
 }
 th, td {
     border: 1px solid #3D8BCD;
     text-align: left;
-    padding: 8px;
+    /*padding: 8px;*/
 }
 
-tr:nth-child(even) {
+tr:nth-child(even).programs {
     background-color: #d8edff;
 }

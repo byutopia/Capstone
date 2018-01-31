@@ -86,6 +86,17 @@ def pstop():
     else:
         return json.dumps({'status': "failed"})
 
+# @rainmachine_mod.route('/rainmachine/createProgram', methods = ['POST'])# POST to stop program
+# def createProgram():
+#     data = '{"name": ,"active": true, "startTime": , "cycles": 0, "soak": 0, "cs_on": false, "delay": 0, "delay_on": false, "status": 0, }'
+#     programID = request.get_json()["id"]# gets id from rainmachine template
+#     req = api.post("program/{programID}/start".format(programID=programID), data)# acutaly POST request
+#     print req
+#     if req:#['error'] != 0:
+#         return json.dumps({'status': "ok"})
+#     else:
+#         return json.dumps({'status': "failed"})
+
 @rainmachine_mod.route('/rainmachine/diag', methods = ['GET'])
 # get diagnostic info
 def diag():

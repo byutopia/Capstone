@@ -42,32 +42,57 @@
 	<div class="raintainer">
 
 		<h4><b>{{ z.name|e }}</b></h4> <!-- ZONE name here -->
-    <!-- Vegetation in formation about the zone. API returns a number that is assosiated with a predetermained type -->
-		<p>Vegetation Type: {% if z.type == 2 %} Grass {% elif z.type == 3  %} Fruit Trees {% elif z.type == 4 %} Flowers {% elif z.type == 5 %} Vegetables {% elif z.type == 6 %} Citrus {% else %} Bushes{% endif %}</p>
+
+<table class="type">
+  <col width="75">
+  <col width="80">
+  <tr>
+    <th class="type">Soil:</th>
+        {% for p in rainmachineInfo.properties.zones %}{% if z.uid == p.uid %}<td class="type">{% if p.soil == 1 %} Clay Loam {% elif p.soil == 2  %} Silty Clay {% elif p.soil == 3 %} Clay {% elif p.soil == 4 %} Loam {% elif p.soil == 5 %} Sandy Loam {% elif p.soil == 6 %} Loamy Sand {% elif p.soil == 7 %} Sand {% elif p.soil == 8 %} Sandy Clay {% elif p.soil == 9 %} Silt Loam {% elif p.soil == 10 %} Silt {% else %} Not specified {% endif %}</td>
+  </tr>
+  <tr>
+    <th class="type">Vegetation:</th>
+    <td class="type">{% if z.type == 2 %} Grass {% elif z.type == 3  %} Fruit Trees {% elif z.type == 4 %} Flowers {% elif z.type == 5 %} Vegetables {% elif z.type == 6 %} Citrus {% else %} Bushes{% endif %}</td>
+  </tr>
+  <tr>
+    <th class="type">Sun Exposure:</th>
+    <td class="type">{% if p.sun == 1 %} Full Sun  {% elif p.sun == 2 %} Partial Shade {% elif p.sun == 3 %} Full Shade {% else %} Not specified {% endif %}</td>
+  </tr>
+</table>
+  {% endif %}
+  {% endfor %}
+
+   <!-- Vegetation in formation about the zone. API returns a number that is assosiated with a predetermained type -->
+<!-- 		<p>Vegetation Type: {% if z.type == 2 %} Grass {% elif z.type == 3  %} Fruit Trees {% elif z.type == 4 %} Flowers {% elif z.type == 5 %} Vegetables {% elif z.type == 6 %} Citrus {% else %} Bushes{% endif %}</p>
 
 		{% for p in rainmachineInfo.properties.zones %}
-    {% if z.uid == p.uid %}
+    {% if z.uid == p.uid %} -->
     <!-- Soil Type about zone -->
-    <p>Soil Type:  {% if p.soil == 1 %} Clay Loam {% elif p.soil == 2  %} Silty Clay {% elif p.soil == 3 %} Clay {% elif p.soil == 4 %} Loam {% elif p.soil == 5 %} Sandy Loam {% elif p.soil == 6 %} Loamy Sand {% elif p.soil == 7 %} Sand {% elif p.soil == 8 %} Sandy Clay {% elif p.soil == 9 %} Silt Loam {% elif p.soil == 10 %} Silt {% else %} Not specified {% endif %}  </p>
+<!--     <p>Soil Type:  {% if p.soil == 1 %} Clay Loam {% elif p.soil == 2  %} Silty Clay {% elif p.soil == 3 %} Clay {% elif p.soil == 4 %} Loam {% elif p.soil == 5 %} Sandy Loam {% elif p.soil == 6 %} Loamy Sand {% elif p.soil == 7 %} Sand {% elif p.soil == 8 %} Sandy Clay {% elif p.soil == 9 %} Silt Loam {% elif p.soil == 10 %} Silt {% else %} Not specified {% endif %}  </p> -->
     <!-- Sun exposure information about zone -->
-    <p>Sun Exposure: {% if p.sun == 1 %} Full Sun  {% elif p.sun == 2 %} Partial Shade {% elif p.sun == 3 %} Full Shade {% else %} Not specified {% endif %}</p>
+<!--     <p>Sun Exposure: {% if p.sun == 1 %} Full Sun  {% elif p.sun == 2 %} Partial Shade {% elif p.sun == 3 %} Full Shade {% else %} Not specified {% endif %}</p>
     {% endif %}
-    {% endfor %}
+    {% endfor %} -->
     <!-- The state of the Zone, whether it is currently running or not -->
-		<div class="status" style="background-color: #3D8BCD;">Running: {% if z.state == 0 %} No {% else %} Yes{% endif %}</div><br> 
-    <!-- The time remaining of watering if the Zone is running, in seconds -->
-		<div class="status" style="background-color: #0964B2;">Time Left in Cycle: {{ (z.remaining / 60)|int }} min. {{ z.remaining % 60}} sec.</div><br>
-    <!-- Button to start watering the zone for 5 mins -->
-    <button class="onOff" id="start" value="{{ z.uid }}" style="background-color: #8FC470;" onclick="zoneStart({{z.uid}})">start</button>
-    <!-- Button to stop watering zone -->
-    <button class="onOff" id="stop" value="{{ z.uid }}" style="background-color: #DB524C;" onclick="zoneStop({{z.uid}})">stop</button>
-</div>
+    
+<!-- <div class="status" style="background-color: #3D8BCD;">Running: {% if z.state == 0 %} No {% else %} Yes{% endif %}</div><br>  -->
+      <!-- The time remaining of watering if the Zone is running, in seconds -->
+  		{% if z.state == 0 %}<div class="grayed">
+        <div class="status" style="background-color: #0964B2;">Inactive</div><br>
+        {% else %}<div>
+        <div class="status" style="background-color: #0964B2;">Time Left: {{ (z.remaining / 60)|int }} min. {{ z.remaining % 60}} sec.</div><br>{% endif %}
+      </div>
+      <!-- Button to start watering the zone for 5 mins -->
+      <button class="onOff" id="start" value="{{ z.uid }}" style="background-color: #8FC470;" onclick="zoneStart({{z.uid}})">start</button>
+      <!-- Button to stop watering zone -->
+      <button class="onOff" id="stop" value="{{ z.uid }}" style="background-color: #DB524C;" onclick="zoneStop({{z.uid}})">stop</button>
+    </div>
 </div>
 {% endfor %}
 <br>
 <br>
 <h3>Programs</h3>
-<table>
+<table class="programs">
   <tr style="background-color:#0964B2">
     <th>Name</th>
     <th>Status</th>
@@ -76,7 +101,7 @@
     <th>Start/Stop</th>
   </tr>
 {% for p in rainmachineInfo.program.programs %}
-  <tr>
+  <tr class="programs">
     <!-- Prints name of Program -->
     <td>{{ p.name|e }}</td>
     <!-- status of the program, running, not running, or broken -->
