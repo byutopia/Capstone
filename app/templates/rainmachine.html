@@ -14,7 +14,6 @@
 <script>
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://weatherwidget.io/js/widget.min.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","weatherwidget-io-js");
 </script>
-<!-- <div style="width: 850px;"><iframe style="display: block;" src="https://cdnres.willyweather.com/widget/loadView.html?id=80571" width="850" height="92" frameborder="0" scrolling="no"></iframe><a style="text-indent: -9999em;float: right;width: 20px;margin: -92px 0 0 0;height: 92px;z-index: 1;position: relative" href="https://www.willyweather.com/ut/utah-county/provo.html" rel="nofollow">https://www.willyweather.com/ut/utah-county/provo.html</a></div> -->
 <!-- <table>
   <tr style="background-color:#0964B2">
     <th>Date</th>
@@ -37,31 +36,31 @@
   {% endfor %}
 </table> -->
 <h3>Zones</h3>
-<!-- rainmachineInfo.programs.programs -->
-<!-- rainmachineInfo.zones.zones -->
 {% for z in rainmachineInfo.zone.zones %}
 <div class="card">
   <img class="center" src="images/{{z.uid|e}}.jpg" alt="grass">
 	<div class="raintainer">
 
-		<h4><b>{{ z.name|e }}</b></h4> <!-- ZONES here -->
-
+		<h4><b>{{ z.name|e }}</b></h4> <!-- ZONE name here -->
+    <!-- Vegetation in formation about the zone. API returns a number that is assosiated with a predetermained type -->
 		<p>Vegetation Type: {% if z.type == 2 %} Grass {% elif z.type == 3  %} Fruit Trees {% elif z.type == 4 %} Flowers {% elif z.type == 5 %} Vegetables {% elif z.type == 6 %} Citrus {% else %} Bushes{% endif %}</p>
 
 		{% for p in rainmachineInfo.properties.zones %}
     {% if z.uid == p.uid %}
+    <!-- Soil Type about zone -->
     <p>Soil Type:  {% if p.soil == 1 %} Clay Loam {% elif p.soil == 2  %} Silty Clay {% elif p.soil == 3 %} Clay {% elif p.soil == 4 %} Loam {% elif p.soil == 5 %} Sandy Loam {% elif p.soil == 6 %} Loamy Sand {% elif p.soil == 7 %} Sand {% elif p.soil == 8 %} Sandy Clay {% elif p.soil == 9 %} Silt Loam {% elif p.soil == 10 %} Silt {% else %} Not specified {% endif %}  </p>
+    <!-- Sun exposure information about zone -->
     <p>Sun Exposure: {% if p.sun == 1 %} Full Sun  {% elif p.sun == 2 %} Partial Shade {% elif p.sun == 3 %} Full Shade {% else %} Not specified {% endif %}</p>
     {% endif %}
     {% endfor %}
-
-		<div class="status" style="background-color: #3D8BCD;">Running: {% if z.state == 0 %} No {% else %} Yes{% endif %}</div><br>
-
-		<div class="status" style="background-color: #0964B2;">Time Left in Cycle: {{ z.remaining|e }} sec.</div><br>
-
-    <button class="onOff" id="start" value="{{ z.uid }}" style="background-color: #8FC470;" onclick="start({{z.uid}})">start</button>
-
-    <button class="onOff" id="stop" value="{{ z.uid }}" style="background-color: #DB524C;" onclick="stop({{z.uid}})">stop</button>
+    <!-- The state of the Zone, whether it is currently running or not -->
+		<div class="status" style="background-color: #3D8BCD;">Running: {% if z.state == 0 %} No {% else %} Yes{% endif %}</div><br> 
+    <!-- The time remaining of watering if the Zone is running, in seconds -->
+		<div class="status" style="background-color: #0964B2;">Time Left in Cycle: {{ (z.remaining / 60)|int }} min. {{ z.remaining % 60}} sec.</div><br>
+    <!-- Button to start watering the zone for 5 mins -->
+    <button class="onOff" id="start" value="{{ z.uid }}" style="background-color: #8FC470;" onclick="zoneStart({{z.uid}})">start</button>
+    <!-- Button to stop watering zone -->
+    <button class="onOff" id="stop" value="{{ z.uid }}" style="background-color: #DB524C;" onclick="zoneStop({{z.uid}})">stop</button>
 </div>
 </div>
 {% endfor %}
@@ -74,13 +73,21 @@
     <th>Status</th>
     <th>Start Time</th>
     <th>Zones in Program</th>
+    <th>Start/Stop</th>
   </tr>
 {% for p in rainmachineInfo.program.programs %}
   <tr>
+    <!-- Prints name of Program -->
     <td>{{ p.name|e }}</td>
+    <!-- status of the program, running, not running, or broken -->
     <td>{% if p.status == 0 %} Not Running {%elif p.status == 1%} Running {% else %} Broken{%endif%}</td>
+    <!-- The scheduled time for the Program to start -->
     <td>{{ p.startTime|e }}</td>
+    <!-- Whether or not the program is currently running -->
     <td>{% for n in p.wateringTimes %} {%if n.active == true%} {{n.name|e}} <div>{% else %} {% endif %}{% endfor %}</td>
+      <!-- the buttons that trigger the Start and Stop POST requests, sends id of program to post function -->
+    <td> <button class="onOff" id="start" value="{{ p.uid }}" style="background-color: #8FC470;" onclick="programStart({{p.uid}})">start</button>
+    <button class="onOff" id="stop" value="{{ p.uid }}" style="background-color: #DB524C;" onclick="programStop({{p.uid}})">stop</button></td>
   </tr>
 {% endfor %}
 </table>

@@ -9,32 +9,35 @@ api = API()
 # create the home template you can set prefix with url_prefix ='/prefix'
 rainmachine_mod = Blueprint('rainmachine', __name__)
 # set a route
+# This function gets the information from the Rainmachine API and adds it to an array to be sent to the Rainmachine Template.
+# It gets the information about the Programs, Zones, Zone Properties, and Weather Mixer.
+# That is all put in an array called data, then when the page it rendered the information can be accessed using the variable rainmachineInfo.name from this page.info you want to acces
 @rainmachine_mod.route('/rainmachine', methods = ['GET'])
 def rainmachine():
     if api.init['error'] != 0:
         return api.init['message']
     try:
-        #req = api.get("program")
+        # req = api.get("program")
         data ={}
-        req = api.get("program")
+        req = api.get("program") # get program information
         if req['error'] != 0:
             return req['message']
         else:
             data['program'] = req['result']
 
-        req = api.get("zone")
+        req = api.get("zone")# get zone information
         if req['error'] != 0:
             return req['message']
         else:
             data['zone'] = req['result']
 
-        req = api.get("zone/properties")
+        req = api.get("zone/properties") # get zone properties
         if req['error'] != 0:
             return req['message']
         else:
             data['properties'] = req['result']
 
-        req = api.get("mixer")
+        req = api.get("mixer")# get weather mixer information
         if req['error'] != 0:
             return req['message']
         else:
@@ -43,26 +46,45 @@ def rainmachine():
     except ValueError:
         return "Error reading API response"
 
-@rainmachine_mod.route('/rainmachine/start', methods = ['POST'])
-def start():
-    data = '{"time": 300}'
-    zoneID = request.get_json()["id"]
-    req = api.post("zone/{zoneID}/start".format(zoneID=zoneID), data)
+@rainmachine_mod.route('/rainmachine/zstart', methods = ['POST']) # POST to start zone 
+def zstart():
+    data = '{"time": 300}' # have to send the amount of time you want the zone to run, we defualt to 5 mins
+    zoneID = request.get_json()["id"]# gets id from rainmachine template button
+    req = api.post("zone/{zoneID}/start".format(zoneID=zoneID), data) # actual post request
     print req
     if req:#['error'] != 0:
         return json.dumps({'status': "ok"})
     else:
         return json.dumps({'status': "failed"})
 
-@rainmachine_mod.route('/rainmachine/stop', methods = ['POST'])
-def stop():
-    zoneID = request.get_json()["id"]
-    if api.post("zone/{zoneID}/stop".format(zoneID=zoneID)):
+@rainmachine_mod.route('/rainmachine/zstop', methods = ['POST'])# POST to stop zone
+def zstop():
+    zoneID = request.get_json()["id"]# gets id from rainmachine template
+    if api.post("zone/{zoneID}/stop".format(zoneID=zoneID)):# acutaly POST request
         # if req['error'] != 0:
         return json.dumps({'status': "ok"})
     else:
         return json.dumps({'status': "failed"})
 
+@rainmachine_mod.route('/rainmachine/pstart', methods = ['POST'])# POST to start program
+def pstart():
+    data = '{"time": 300}'
+    programID = request.get_json()["id"]# gets id from rainmachine template
+    req = api.post("program/{programID}/start".format(programID=programID), data)# acutaly POST request
+    print req
+    if req:#['error'] != 0:
+        return json.dumps({'status': "ok"})
+    else:
+        return json.dumps({'status': "failed"})
+
+@rainmachine_mod.route('/rainmachine/pstop', methods = ['POST'])# POST to stop program
+def pstop():
+    programID = request.get_json()["id"]# gets id from rainmachine template
+    if api.post("program/{programID}/stop".format(programID=programID)):# acutaly POST request
+        # if req['error'] != 0:
+        return json.dumps({'status': "ok"})
+    else:
+        return json.dumps({'status': "failed"})
 
 @rainmachine_mod.route('/rainmachine/diag', methods = ['GET'])
 # get diagnostic info
