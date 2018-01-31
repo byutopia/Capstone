@@ -353,9 +353,8 @@ table.dataTable thead .sorting:after {
     color: #df8a13;
 }
 #capvideo {
-  position: absolute;
-  right:45rem;
+  position: relative;
   width: 80rem;
   height: 45rem;
-  top: 35rem;
+
 }
