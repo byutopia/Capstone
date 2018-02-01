@@ -2,6 +2,7 @@ from flask import Flask, Response, render_template, send_from_directory
 from flask_socketio import SocketIO
 import json
 
+
 socketio = SocketIO()
 
 def create_app(debug=False):
@@ -12,10 +13,12 @@ def create_app(debug=False):
     from modules.rainmachine.controller import rainmachine_mod as rainmachine_module
     from modules.purpleair.controller import purpleair_mod as purpleair_module
     from modules.wago.controller import wago_mod as wago_module
+    from modules.camera.controller import camera_mod as camera_module
 
     app.register_blueprint(rainmachine_module)
     app.register_blueprint(purpleair_module)
     app.register_blueprint(wago_module)
+    app.register_blueprint(camera_module)
 
     import jinja2.exceptions
     @app.route('/')
