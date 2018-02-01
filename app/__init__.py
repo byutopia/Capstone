@@ -14,8 +14,6 @@ def create_app(debug=False):
     from modules.wago.controller import wago_mod as wago_module
     from modules.camera.controller import camera_mod as camera_module
 
-
-
     app.register_blueprint(rainmachine_module)
     app.register_blueprint(purpleair_module)
     app.register_blueprint(wago_module)
