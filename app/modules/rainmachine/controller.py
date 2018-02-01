@@ -1,6 +1,7 @@
 import requests
 import json
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for
+from ... import socketio
 
 from API import API
 from datetime import datetime
@@ -53,6 +54,7 @@ def zstart():
     req = api.post("zone/{zoneID}/start".format(zoneID=zoneID), data) # actual post request
     print req
     if req:#['error'] != 0:
+        socketio.emit('rainmachineZone', {'zoneID': zoneID, 'status': 'started', 'time': 300})
         return json.dumps({'status': "ok"})
     else:
         return json.dumps({'status': "failed"})
@@ -62,6 +64,7 @@ def zstop():
     zoneID = request.get_json()["id"]# gets id from rainmachine template
     if api.post("zone/{zoneID}/stop".format(zoneID=zoneID)):# acutaly POST request
         # if req['error'] != 0:
+        socketio.emit('rainmachineZone', {'zoneID': zoneID, 'status': 'stopped'})
         return json.dumps({'status': "ok"})
     else:
         return json.dumps({'status': "failed"})

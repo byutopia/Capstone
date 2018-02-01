@@ -37,7 +37,7 @@
 </table> -->
 <h3>Zones</h3>
 {% for z in rainmachineInfo.zone.zones %}
-<div class="card">
+<div class="card" id="card-{{z.uid}}">
   <img class="center" src="images/{{z.uid|e}}.jpg" alt="grass">
 	<div class="raintainer">
 
@@ -47,13 +47,16 @@
   <col width="75">
   <col width="80">
   <tr>
+    <!-- Soil Type about zone -->
     <th class="type">Soil:</th>
         {% for p in rainmachineInfo.properties.zones %}{% if z.uid == p.uid %}<td class="type">{% if p.soil == 1 %} Clay Loam {% elif p.soil == 2  %} Silty Clay {% elif p.soil == 3 %} Clay {% elif p.soil == 4 %} Loam {% elif p.soil == 5 %} Sandy Loam {% elif p.soil == 6 %} Loamy Sand {% elif p.soil == 7 %} Sand {% elif p.soil == 8 %} Sandy Clay {% elif p.soil == 9 %} Silt Loam {% elif p.soil == 10 %} Silt {% else %} Not specified {% endif %}</td>
   </tr>
+  <!-- Vegetation in formation about the zone. API returns a number that is assosiated with a predetermained type -->
   <tr>
     <th class="type">Vegetation:</th>
     <td class="type">{% if z.type == 2 %} Grass {% elif z.type == 3  %} Fruit Trees {% elif z.type == 4 %} Flowers {% elif z.type == 5 %} Vegetables {% elif z.type == 6 %} Citrus {% else %} Bushes{% endif %}</td>
   </tr>
+  <!-- Sun exposure information about zone -->
   <tr>
     <th class="type">Sun Exposure:</th>
     <td class="type">{% if p.sun == 1 %} Full Sun  {% elif p.sun == 2 %} Partial Shade {% elif p.sun == 3 %} Full Shade {% else %} Not specified {% endif %}</td>
@@ -61,22 +64,6 @@
 </table>
   {% endif %}
   {% endfor %}
-
-   <!-- Vegetation in formation about the zone. API returns a number that is assosiated with a predetermained type -->
-<!-- 		<p>Vegetation Type: {% if z.type == 2 %} Grass {% elif z.type == 3  %} Fruit Trees {% elif z.type == 4 %} Flowers {% elif z.type == 5 %} Vegetables {% elif z.type == 6 %} Citrus {% else %} Bushes{% endif %}</p>
-
-		{% for p in rainmachineInfo.properties.zones %}
-    {% if z.uid == p.uid %} -->
-    <!-- Soil Type about zone -->
-<!--     <p>Soil Type:  {% if p.soil == 1 %} Clay Loam {% elif p.soil == 2  %} Silty Clay {% elif p.soil == 3 %} Clay {% elif p.soil == 4 %} Loam {% elif p.soil == 5 %} Sandy Loam {% elif p.soil == 6 %} Loamy Sand {% elif p.soil == 7 %} Sand {% elif p.soil == 8 %} Sandy Clay {% elif p.soil == 9 %} Silt Loam {% elif p.soil == 10 %} Silt {% else %} Not specified {% endif %}  </p> -->
-    <!-- Sun exposure information about zone -->
-<!--     <p>Sun Exposure: {% if p.sun == 1 %} Full Sun  {% elif p.sun == 2 %} Partial Shade {% elif p.sun == 3 %} Full Shade {% else %} Not specified {% endif %}</p>
-    {% endif %}
-    {% endfor %} -->
-    <!-- The state of the Zone, whether it is currently running or not -->
-    
-<!-- <div class="status" style="background-color: #3D8BCD;">Running: {% if z.state == 0 %} No {% else %} Yes{% endif %}</div><br>  -->
-      <!-- The time remaining of watering if the Zone is running, in seconds -->
   		{% if z.state == 0 %}<div class="grayed">
         <div class="status" style="background-color: #0964B2;">Inactive</div><br>
         {% else %}<div>
@@ -118,5 +105,6 @@
 </table>
 <br>
 <br>
-<script type="text/javascript" src="../js/rainmachine.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.slim.js"></script>
+<script src="{{ url_for('serve_static_resource', resource='js/rainmachine.js') }}"></script>
 {% endblock %}
