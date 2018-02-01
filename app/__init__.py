@@ -1,5 +1,6 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, Response, render_template, send_from_directory
 from flask_socketio import SocketIO
+import json
 
 socketio = SocketIO()
 
@@ -28,6 +29,10 @@ def create_app(debug=False):
     @app.route('/<path:resource>')
     def serve_static_resource(resource):
         return send_from_directory(app.static_folder, resource)
+
+    @app.route('/teapot')
+    def teapot():
+        return Response(json.dumps({'message': 'I am a teapot!'}), status=418, mimetype='application/json')
 
     @app.errorhandler(jinja2.exceptions.TemplateNotFound)
     def template_not_found(e):
