@@ -4,7 +4,7 @@ from flask_socketio import SocketIO
 
 socketio = SocketIO()
 
-def create_app(debug=False, settings_override=None):
+def create_app(debug=False):
     app = Flask(__name__, static_folder='static', template_folder='templates')
     app.debug = debug
     app.config["SECRET_KEY"] = 'strong secret'
