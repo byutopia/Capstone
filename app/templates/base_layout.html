@@ -54,7 +54,7 @@
             <!-- /.navbar-top-links -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
-                  <img src="static/images/mainLogo.png" style="height: 10rem; padding-left: 6rem; width: 18rem;">
+                  <img src="{{ url_for('serve_static_resource', resource='static/images/mainLogo.png')}}" style="height: 10rem; padding-left: 6rem; width: 18rem;">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
@@ -71,10 +71,10 @@
                             <a href="index"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
-                            <a href="rainmachine"><i class="fa fa-umbrella fa-fw"></i> Rainmachine</a>
+                            <a href="rainmachine"><i class="fa fa-tint fa-fw"></i> Rainmachine</a>
                         </li>
                         <li>
-                            <a href="purpleair"><i class="fa fa-sun-o fa-fw"></i> Purpleair</a>
+                            <a href="purpleair"><i class="fa fa-cloud fa-fw"></i> Purpleair</a>
                         </li>
                         <li>
                             <a href="wago"><i class="fa fa-cube fa-fw"></i> Wago</a>

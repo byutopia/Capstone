@@ -46,8 +46,8 @@
     </div>
     <!-- /.col-lg-4 -->
 </div>
-<video id="capvideo" controls="" poster="static/images/blackground.jpg">
-<source src="static/videos/capvideo.mp4" type="video/mp4">
+<video id="capvideo" controls="" poster="{{ url_for('serve_static_resource', resource='static/images/blackground.jpg')}}">
+<source src="{{ url_for('serve_static_resource', resource='static/videos/capvideo.mp4')}}" type="video/mp4">
 </video>
 <!-- <div class="row">
     <div class="col-lg-8">
