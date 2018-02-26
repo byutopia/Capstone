@@ -99,7 +99,7 @@ body {
 }
 
 .sidebar ul li a.active {
-    background-color: #eee;
+    background-color: #DBDC00;
 }
 
 .sidebar .arrow {
@@ -300,17 +300,17 @@ table.dataTable thead .sorting:after {
 }
 
 .panel-green {
-    border-color: #5cb85c;
+    border-color: #DBDC00;
 }
 
 .panel-green .panel-heading {
-    border-color: #5cb85c;
-    color: #fff;
-    background-color: #5cb85c;
+    border-color: #DBDC00;
+    color: #000;
+    background-color: #DBDC00;
 }
 
 .panel-green a {
-    color: #5cb85c;
+    color: #DBDC00;
 }
 
 .panel-green a:hover {
@@ -351,4 +351,10 @@ table.dataTable thead .sorting:after {
 
 .panel-yellow a:hover {
     color: #df8a13;
+}
+#capvideo {
+  position: relative;
+  width: 80rem;
+  height: 45rem;
+
 }
