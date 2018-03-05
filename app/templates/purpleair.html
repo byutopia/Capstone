@@ -10,7 +10,7 @@
     </style>
 
     <div id="map"></div>
-	    <script>
+	    <script>	    	
 	      var map;
 	      var markers = [];
 	      function initMap() {
@@ -18,7 +18,12 @@
 	          center: {lat: 40.24533 , lng: -111.644807 },
 	          zoom: 8
 	        });
-
+	        //resize map to webpage
+	        google.maps.event.addDomListener(window, "resize", function() {
+			   var center = map.getCenter();
+			   google.maps.event.trigger(map, "resize");
+			   map.setCenter(center); 
+			});
 
 	       {% for x in devices %}
 	       

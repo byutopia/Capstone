@@ -65,3 +65,8 @@ function programStop(id) {
 	.then(response => console.log('Success:', response));
 	console.log(id);
 }
+document.addEventListener("DOMContentLoaded", function() {
+	var socket = io.connect('http://' + document.domain + ':' + location.port);
+	
+
+});
