@@ -81,24 +81,24 @@
 <h3>Programs</h3>
 <table class="programs">
   <tr style="background-color:#0964B2">
-    <th>Name</th>
-    <th>Status</th>
-    <th>Start Time</th>
-    <th>Zones in Program</th>
-    <th>Start/Stop</th>
+    <th class="title">Name</th>
+    <th class="title">Status</th>
+    <th class="title">Start Time</th>
+    <th class="title">Zones in Program</th>
+    <th class="title">Start/Stop</th>
   </tr>
 {% for p in rainmachineInfo.program.programs %}
   <tr class="programs">
     <!-- Prints name of Program -->
-    <td>{{ p.name|e }}</td>
+    <td class="title">{{ p.name|e }}</td>
     <!-- status of the program, running, not running, or broken -->
-    <td>{% if p.status == 0 %} Not Running {%elif p.status == 1%} Running {% else %} Broken{%endif%}</td>
+    <td class="title">{% if p.status == 0 %} Not Running {%elif p.status == 1%} Running {% else %} Broken{%endif%}</td>
     <!-- The scheduled time for the Program to start -->
-    <td>{{ p.startTime|e }}</td>
+    <td class="title">{{ p.startTime|e }}</td>
     <!-- Whether or not the program is currently running -->
-    <td>{% for n in p.wateringTimes %} {%if n.active == true%} {{n.name|e}} <div>{% else %} {% endif %}{% endfor %}</td>
+    <td class="title">{% for n in p.wateringTimes %} {%if n.active == true%} {{n.name|e}} <div>{% else %} {% endif %}{% endfor %}</td>
       <!-- the buttons that trigger the Start and Stop POST requests, sends id of program to post function -->
-    <td> <button class="onOff" id="start" value="{{ p.uid }}" style="background-color: #8FC470;" onclick="programStart({{p.uid}})">start</button>
+    <td id="StartStop"> <button class="onOff" id="start" value="{{ p.uid }}" style="background-color: #8FC470;" onclick="programStart({{p.uid}})">start</button>
     <button class="onOff" id="stop" value="{{ p.uid }}" style="background-color: #DB524C;" onclick="programStop({{p.uid}})">stop</button></td>
   </tr>
 {% endfor %}

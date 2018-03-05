@@ -15,6 +15,13 @@
 .raintainer {
     padding: 2px 16px;
 }
+#StartStop{
+    border-style: hidden;
+    /*background-color:white;*/
+    align-content: center;
+    text-align:center; 
+    vertical-align:middle;
+}
 img {
     border-radius: 5px 5px 0 0;
     width: 250px;
@@ -58,8 +65,15 @@ th.type, td.type {
 table {
     width: 100%;
 }
+th.title{
+    color:white;
+    text-align: center;
+}
+td.title{
+    text-align: center; 
+}
 th, td {
-    border: 1px solid #3D8BCD;
+    /*border: 1px solid #3D8BCD;*/
     text-align: left;
     /*padding: 8px;*/
 }
