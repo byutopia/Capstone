@@ -15,6 +15,13 @@
 .raintainer {
     padding: 2px 16px;
 }
+#StartStop{
+    border-style: hidden;
+    /*background-color:white;*/
+    align-content: center;
+    text-align:center; 
+    vertical-align:middle;
+}
 img {
     border-radius: 5px 5px 0 0;
     width: 250px;
@@ -44,16 +51,34 @@ div.status{
     margin: 4px 2px;
     /*cursor: pointer;*/
     width: 21.5rem;
+    opacity: 0.4;
+}
+div.grayed{
+    opacity: 0.3;
+}
+table.type {
+    width: 100%;
+    border: none;
+}
+th.type, td.type {
+    border: none;
 }
 table {
     width: 100%;
 }
+th.title{
+    color:white;
+    text-align: center;
+}
+td.title{
+    text-align: center; 
+}
 th, td {
-    border: 1px solid #3D8BCD;
+    /*border: 1px solid #3D8BCD;*/
     text-align: left;
-    padding: 8px;
+    /*padding: 8px;*/
 }
 
-tr:nth-child(even) {
+.programs tr:nth-child(even) {
     background-color: #d8edff;
 }
