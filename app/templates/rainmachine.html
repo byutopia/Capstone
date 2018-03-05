@@ -64,11 +64,11 @@
 </table>
   {% endif %}
   {% endfor %}
-  		{% if z.state == 0 %}<div class="grayed">
+  <!--  		{# if z.state == 0 #}<div class="grayed">-->
         <div class="status" style="background-color: #0964B2;">Inactive</div><br>
-        {% else %}<div>
-        <div class="status" style="background-color: #0964B2;">Time Left: {{ (z.remaining / 60)|int }} min. {{ z.remaining % 60}} sec.</div><br>{% endif %}
-      </div>
+        <!--{# else }<div>
+        <div class="status" style="background-color: #0964B2;">Time Left: {{ (z.remaining / 60)|int }} min. {{ z.remaining % 60}} sec.</div><br>{ endif #}
+            </div>-->
       <!-- Button to start watering the zone for 5 mins -->
       <button class="onOff" id="start" value="{{ z.uid }}" style="background-color: #8FC470;" onclick="zoneStart({{z.uid}})">start</button>
       <!-- Button to stop watering zone -->
@@ -88,7 +88,7 @@
     <th class="title">Start/Stop</th>
   </tr>
 {% for p in rainmachineInfo.program.programs %}
-  <tr class="programs">
+  <tr id="program-{{p.uid}}">
     <!-- Prints name of Program -->
     <td class="title">{{ p.name|e }}</td>
     <!-- status of the program, running, not running, or broken -->

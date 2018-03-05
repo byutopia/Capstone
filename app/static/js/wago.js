@@ -7,10 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
             //$(".status").html("Lights are on!").css("background", "#407F40")
             stat.innerHTML = "Lights are on!"
             stat.style.background = "#407F40"
+            stat.style.color = "white"
         } else {
             //$(".status").html("Lights are off...").css("background", "#7F3F38")
             stat.innerHTML = "Lights are off..."
             stat.style.background = "#7F3F38"
+            stat.style.color = "white"
         }
     })
 })

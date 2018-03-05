@@ -51,6 +51,7 @@ div.status{
     margin: 4px 2px;
     /*cursor: pointer;*/
     width: 21.5rem;
+    opacity: 0.4;
 }
 div.grayed{
     opacity: 0.3;
@@ -78,6 +79,6 @@ th, td {
     /*padding: 8px;*/
 }
 
-tr:nth-child(even).programs {
+.programs tr:nth-child(even) {
     background-color: #d8edff;
 }
