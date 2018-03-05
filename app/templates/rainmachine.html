@@ -64,11 +64,11 @@
 </table>
   {% endif %}
   {% endfor %}
-  		{% if z.state == 0 %}<div class="grayed">
+  <!--  		{# if z.state == 0 #}<div class="grayed">-->
         <div class="status" style="background-color: #0964B2;">Inactive</div><br>
-        {% else %}<div>
-        <div class="status" style="background-color: #0964B2;">Time Left: {{ (z.remaining / 60)|int }} min. {{ z.remaining % 60}} sec.</div><br>{% endif %}
-      </div>
+        <!--{# else }<div>
+        <div class="status" style="background-color: #0964B2;">Time Left: {{ (z.remaining / 60)|int }} min. {{ z.remaining % 60}} sec.</div><br>{ endif #}
+            </div>-->
       <!-- Button to start watering the zone for 5 mins -->
       <button class="onOff" id="start" value="{{ z.uid }}" style="background-color: #8FC470;" onclick="zoneStart({{z.uid}})">start</button>
       <!-- Button to stop watering zone -->
@@ -88,17 +88,17 @@
     <th>Start/Stop</th>
   </tr>
 {% for p in rainmachineInfo.program.programs %}
-  <tr class="programs">
+  <tr id="program-{{p.uid}}">
     <!-- Prints name of Program -->
-    <td>{{ p.name|e }}</td>
+    <td class="name">{{ p.name|e }}</td>
     <!-- status of the program, running, not running, or broken -->
-    <td>{% if p.status == 0 %} Not Running {%elif p.status == 1%} Running {% else %} Broken{%endif%}</td>
+    <td class="state">{% if p.status == 0 %} Not Running {%elif p.status == 1%} Running {% else %} Broken{%endif%}</td>
     <!-- The scheduled time for the Program to start -->
-    <td>{{ p.startTime|e }}</td>
+    <td class="time">{{ p.startTime|e }}</td>
     <!-- Whether or not the program is currently running -->
-    <td>{% for n in p.wateringTimes %} {%if n.active == true%} {{n.name|e}} <div>{% else %} {% endif %}{% endfor %}</td>
+    <td class="zones">{% for n in p.wateringTimes %} {%if n.active == true%} {{n.name|e}} <div>{% else %} {% endif %}{% endfor %}</td>
       <!-- the buttons that trigger the Start and Stop POST requests, sends id of program to post function -->
-    <td> <button class="onOff" id="start" value="{{ p.uid }}" style="background-color: #8FC470;" onclick="programStart({{p.uid}})">start</button>
+    <td class="controls"> <button class="onOff" id="start" value="{{ p.uid }}" style="background-color: #8FC470;" onclick="programStart({{p.uid}})">start</button>
     <button class="onOff" id="stop" value="{{ p.uid }}" style="background-color: #DB524C;" onclick="programStop({{p.uid}})">stop</button></td>
   </tr>
 {% endfor %}
