@@ -30,18 +30,19 @@ def create_app(debug=False):
 
     class ServerError(Exception):pass
 
-    @app.route('/')
-    def index():
-        if 'username' in session:
-            return redirect(url_for('login'))
+    with app.app_context():
+        @app.route('/')
+        def index():
+            if 'username' in session:
+                return redirect(url_for('login'))
 
-    username_session = escape(session['username']).capitalize()
-    return render_template('index.html', session_user_name=username_session)
+            username_session = escape(session['username']).capitalize()
+            return render_template('index.html', session_user_name=username_session)
 
-    @app.route('/login', methods=['GET', 'POST'])
-    def login():
-        if 'username' in session:
-            return redirect(url_for('index'))
+        @app.route('/login', methods=['GET', 'POST'])
+        def login():
+            if 'username' in session:
+                return redirect(url_for('index'))
 
             error = None
             try:
@@ -64,8 +65,7 @@ def create_app(debug=False):
                 raise ServerError('Invalid password')
             except ServerError as e:
                 error = str(e)
-
-    return render_template('login.html', error=error)
+            return render_template('login.html')
 
     @app.route('/logout')
     def logout():
