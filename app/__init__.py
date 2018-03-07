@@ -28,44 +28,42 @@ def create_app(debug=False):
 
     import jinja2.exceptions
 
-    class ServerError(Exception):pass
-
-    with app.app_context():
-        @app.route('/')
-        def index():
+    #with app.app_context():  #Since the app isn't technically made before this action occurs, you make a pretend version.
+    @app.route('/')
+    def index():
             if 'username' in session:
                 return redirect(url_for('login'))
+            # username_session = escape(session['username']).capitalize()
+            # return render_template('index.html', session_user_name=username_session)
 
-            username_session = escape(session['username']).capitalize()
-            return render_template('index.html', session_user_name=username_session)
-
-        @app.route('/login', methods=['GET', 'POST'])
-        def login():
-            if 'username' in session:
-                return redirect(url_for('index'))
-
-            error = None
-            try:
-                if request.method == 'POST':
-                    username_form  = request.form['username']
-                    cur.execute("SELECT COUNT(1) FROM users WHERE name = {};"
+    @app.route('/login', methods=['GET', 'POST'])
+    def login():
+        if 'username' in session:
+            return redirect(url_for('index'))
+            print 'No error'
+        try:
+            if request.method == 'POST':
+                username_form = request.form['username']
+                cur.execute("SELECT COUNT(1) FROM users WHERE username = {};"
                             .format(username_form))
+                # return 'I hate myself'
 
                 if not cur.fetchone()[0]:
                     raise ServerError('Invalid username')
-                    password_form  = request.form['password']
-                    cur.execute("SELECT pass FROM users WHERE name = {};"
+
+                password_form = request.form['password']
+                cur.execute("SELECT password FROM users WHERE username = {};"
                             .format(username_form))
+                return 'I hate myself'
 
                 for row in cur.fetchall():
                     if md5(password_form).hexdigest() == row[0]:
                         session['username'] = request.form['username']
-                    return redirect(url_for('index'))
+                        return redirect(url_for('index'))
+                    raise ServerError('Invalid Password')
 
-                raise ServerError('Invalid password')
-            except ServerError as e:
-                error = str(e)
-            return render_template('login.html')
+                #something wrong with the for loop above
+        return render_template('login.html')
 
     @app.route('/logout')
     def logout():
