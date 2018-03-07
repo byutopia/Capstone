@@ -25,16 +25,17 @@ def create_app(debug=False):
 
     db = MySQLdb.connect(host="localhost", user="admin", passwd="strong password", db="capstone")
     cur = db.cursor()
+    class ServerError(Exception):pass
 
     import jinja2.exceptions
 
     #with app.app_context():  #Since the app isn't technically made before this action occurs, you make a pretend version.
     @app.route('/')
     def index():
-            if 'username' in session:
+            if 'username' not in session:
                 return redirect(url_for('login'))
-            # username_session = escape(session['username']).capitalize()
-            # return render_template('index.html', session_user_name=username_session)
+            username_session = escape(session['username']).capitalize()
+            return render_template('index.html', session_user_name=username_session)
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
@@ -44,25 +45,27 @@ def create_app(debug=False):
         try:
             if request.method == 'POST':
                 username_form = request.form['username']
-                cur.execute("SELECT COUNT(1) FROM users WHERE username = {};"
+                print username_form
+                cur.execute("SELECT COUNT(1) FROM users WHERE username = '{}';"
                             .format(username_form))
-                # return 'I hate myself'
-
+                print "MADE IT"
                 if not cur.fetchone()[0]:
                     raise ServerError('Invalid username')
 
                 password_form = request.form['password']
-                cur.execute("SELECT password FROM users WHERE username = {};"
+                cur.execute("SELECT password FROM users WHERE username = '{}';"
                             .format(username_form))
-                return 'I hate myself'
+
 
                 for row in cur.fetchall():
                     if md5(password_form).hexdigest() == row[0]:
                         session['username'] = request.form['username']
                         return redirect(url_for('index'))
                     raise ServerError('Invalid Password')
-
-                #something wrong with the for loop above
+            #something wrong with the for loop above
+        except MySQLdb.Error,e:
+            print str(e)
+            return "I'm broken you hurt me :("
         return render_template('login.html')
 
     @app.route('/logout')
