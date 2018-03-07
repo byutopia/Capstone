@@ -56,13 +56,12 @@ def create_app(debug=False):
                 cur.execute("SELECT password FROM users WHERE username = '{}';"
                             .format(username_form))
 
-
                 for row in cur.fetchall():
                     if md5(password_form).hexdigest() == row[0]:
                         session['username'] = request.form['username']
                         return redirect(url_for('index'))
                     raise ServerError('Invalid Password')
-            #something wrong with the for loop above
+
         except MySQLdb.Error,e:
             print str(e)
             return "I'm broken you hurt me :("
@@ -71,7 +70,7 @@ def create_app(debug=False):
     @app.route('/logout')
     def logout():
         session.pop('username', None)
-        return redirect(url_for('index'))
+        return redirect(url_for('login'))
 
     @app.route('/<pagename>')
     def admin(pagename):
