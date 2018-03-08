@@ -23,7 +23,7 @@ def create_app(debug=False):
     app.register_blueprint(wago_module)
     app.register_blueprint(camera_module)
 
-    db = MySQLdb.connect(host="localhost", user="admin", passwd="strong password", db="capstone")
+    db = MySQLdb.connect(host="localhost", user="user1", passwd="password", db="SmartCity")
     cur = db.cursor()
     class ServerError(Exception):pass
 
