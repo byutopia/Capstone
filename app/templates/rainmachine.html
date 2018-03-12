@@ -14,6 +14,7 @@
 <script>
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://weatherwidget.io/js/widget.min.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","weatherwidget-io-js");
 </script>
+{% if rainmachineInfo.success == 1 %}
 <!-- <table>
   <tr style="background-color:#0964B2">
     <th>Date</th>
@@ -22,21 +23,9 @@
     <th>Min. Temperature</th>
   </tr>
   <tr>
-  {% for w in rainmachineInfo.mixer.mixerData %}
-  {% for d in range(1, w.dailyValues|length) %}
-  {% if w.dailyValues|length %}
-    <td>{{ w.dailyValues[d].day|e}}</td> -->
-    <!-- <td>{{ now }}</td> -->
-<!--     <td>{{ w.dailyValues[d].temperature *(9/5)+32 }} &#8457; </td>
-    <td>{{ w.dailyValues[d].maxTemp *(9/5)+32}} &#8457;</td>
-    <td>{{ w.dailyValues[d].minTemp *(9/5)+32}} &#8457;</td>
-  </tr>
-  {% endif %}
-  {% endfor %}
-  {% endfor %}
 </table> -->
 <h3>Zones</h3>
-{% for z in rainmachineInfo.zone.zones %}
+{% for z in rainmachineInfo.data.zone.zones %}
 <div class="card" id="card-{{z.uid}}">
   <img class="center" src="images/{{z.uid|e}}.jpg" alt="grass">
 	<div class="raintainer">
@@ -49,7 +38,7 @@
   <tr>
     <!-- Soil Type about zone -->
     <th class="type">Soil:</th>
-        {% for p in rainmachineInfo.properties.zones %}{% if z.uid == p.uid %}<td class="type">{% if p.soil == 1 %} Clay Loam {% elif p.soil == 2  %} Silty Clay {% elif p.soil == 3 %} Clay {% elif p.soil == 4 %} Loam {% elif p.soil == 5 %} Sandy Loam {% elif p.soil == 6 %} Loamy Sand {% elif p.soil == 7 %} Sand {% elif p.soil == 8 %} Sandy Clay {% elif p.soil == 9 %} Silt Loam {% elif p.soil == 10 %} Silt {% else %} Not specified {% endif %}</td>
+        {% for p in rainmachineInfo.data.properties.zones %}{% if z.uid == p.uid %}<td class="type">{% if p.soil == 1 %} Clay Loam {% elif p.soil == 2  %} Silty Clay {% elif p.soil == 3 %} Clay {% elif p.soil == 4 %} Loam {% elif p.soil == 5 %} Sandy Loam {% elif p.soil == 6 %} Loamy Sand {% elif p.soil == 7 %} Sand {% elif p.soil == 8 %} Sandy Clay {% elif p.soil == 9 %} Silt Loam {% elif p.soil == 10 %} Silt {% else %} Not specified {% endif %}</td>
   </tr>
   <!-- Vegetation in formation about the zone. API returns a number that is assosiated with a predetermained type -->
   <tr>
@@ -87,12 +76,12 @@
     <th class="title">Zones in Program</th>
     <th class="title">Start/Stop</th>
   </tr>
-{% for p in rainmachineInfo.program.programs %}
+{% for p in rainmachineInfo.data.program.programs %}
   <tr id="program-{{p.uid}}">
     <!-- Prints name of Program -->
     <td class="title">{{ p.name|e }}</td>
     <!-- status of the program, running, not running, or broken -->
-    <td class="title">{% if p.status == 0 %} Not Running {%elif p.status == 1%} Running {% else %} Broken{%endif%}</td>
+    <td class="title">{% if p.status == 0 %} Not Running {%elif p.status == 1%} Running {% else %} Queued{%endif%}</td>
     <!-- The scheduled time for the Program to start -->
     <td class="title">{{ p.startTime|e }}</td>
     <!-- Whether or not the program is currently running -->
@@ -103,6 +92,9 @@
   </tr>
 {% endfor %}
 </table>
+{% else %}
+<span class="error">{{ rainmachineInfo.data }}</span>
+{% endif %}
 <br>
 <br>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.slim.js"></script>
