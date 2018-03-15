@@ -46,11 +46,11 @@ def get_all():
     except ValueError:
         return "Error reading API response"
 
-@socketio.on('connect', namespace='/rainmachine')
+@socketio.on('getData')
 def send_data():
     data = get_all()
     if type(data) == dict:
-        socketio.send('rainmachineData', data)
+        socketio.emit('rainmachineData', data)
 
 @rainmachine_mod.route('/rainmachine', methods = ['GET'])
 def rainmachine():
@@ -60,9 +60,9 @@ def rainmachine():
         return redirect(url_for('index'))
     data = get_all()
     if type(data) == dict:
-        return render_template("rainmachine.html", rainmachineInfo = data)
+        return render_template("rainmachine.html", rainmachineInfo = {'success': 1, 'data': data})
     else: 
-        return "Error reading API response"
+        return render_template("rainmachine.html", rainmachineInfo = {'success': 0, 'data': "Error reading API response"})
 
 #     if api.init['error'] != 0:
         # return api.init['message']

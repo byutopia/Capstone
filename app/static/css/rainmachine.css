@@ -52,9 +52,11 @@ div.status{
     /*cursor: pointer;*/
     width: 21.5rem;
     opacity: 0.4;
+    transition: opacity 0.7s linear;
 }
-div.grayed{
-    opacity: 0.3;
+div.active{
+    opacity: 1;
+    transition: opacity 0.7s linear;
 }
 table.type {
     width: 100%;
