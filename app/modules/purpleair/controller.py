@@ -4,7 +4,7 @@ purpleair_mod = Blueprint('purpleair', __name__)
 #set a route
 purpleairIPs = ['192.168.20.61','192.168.20.59']
 
-session = requests.Session()
+ses = requests.Session()
 
 def getCordsByIP(IPs):
 	cordsAndIP = []
@@ -12,7 +12,7 @@ def getCordsByIP(IPs):
 	for ip in IPs:
 		try:
 			url = URL.format(ip)
-			req = session.get(url, timeout=3, verify=False)
+			req = ses.get(url, timeout=3, verify=False)
 			res = req.json()
 			lat = res['lat']
 			lon = res['lon']
@@ -28,5 +28,9 @@ purpleairDevices = getCordsByIP(purpleairIPs)
 print purpleairDevices
 @purpleair_mod.route('/purpleair', methods = ['GET'])
 def purpleair():
-	#return the template
-	return render_template("purpleair.html", devices = purpleairDevices)
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    if 'purpleair' not in session['roles']:
+        return redirect(url_for('index'))
+    #return the template
+    return render_template("purpleair.html", devices = purpleairDevices)
