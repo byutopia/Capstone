@@ -8,8 +8,9 @@
       }
      
     </style>
-
+    <div id="permissions">
     <div id="map"></div>
+    </div>
 	    <script>	    	
 	      var map;
 	      var markers = [];
@@ -24,7 +25,7 @@
 			   google.maps.event.trigger(map, "resize");
 			   map.setCenter(center); 
 			});
-
+			};
 	       {% for x in devices %}
 	       
 	       	var marker{{loop.index}} = new google.maps.Marker({
@@ -33,8 +34,12 @@
           			ip:"http://{{x.ip}}"});
 	       	markers.push(marker{{loop.index}});
 	       	google.maps.event.addListener(marker{{loop.index}}, 'click', function() {
-				    window.open(marker{{loop.index}}.ip);
+				    // window.open(marker{{loop.index}}.ip);
+				    document.getElementById('content').innerHTML = getHTML(marker{{loop.index}}.ip);
+				    // document.getElementById('content').innerHTML = "Anna"
 				});
+            
+            console.log(marker{{loop.index}}.ip);
 
 	       {% endfor %}
 	       
@@ -42,4 +47,15 @@
 	    </script>
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0Ip3If5_-0Mt5TObrCGBanY3wLzr4zQQ&callback=initMap"
 	    async defer></script>
+        {% if 'write' not in session['roles']  %}
+        <script>
+        window.onload=function(){
+            document.getElementById('permissions').addEventListener("click",handler,true);
+            function handler(e){
+                e.stopPropagation();
+                e.preventDefault();
+            }            
+        }
+        </script>
+        {%endif%}
 {% endblock %}

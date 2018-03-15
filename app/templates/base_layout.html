@@ -28,6 +28,7 @@
             <!-- /.navbar-header -->
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
+                Hello {{session['firstname']}}!
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -64,18 +65,26 @@
                         <li>
                             <a href="index"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+                        {%if 'rainmachine' in session['roles']%}
                         <li>
                             <a href="rainmachine"><i class="fa fa-tint fa-fw"></i> Rainmachine</a>
                         </li>
+                        {%endif%}
+                        {%if 'purpleair' in session['roles']%}
                         <li>
                             <a href="purpleair"><i class="fa fa-cloud fa-fw"></i> Purpleair</a>
                         </li>
+                        {%endif%}
+                        {%if 'wago' in session['roles']%}
                         <li>
                             <a href="wago"><i class="fa fa-cube fa-fw"></i> Wago</a>
                         </li>
+                        {%endif%}
+                        {%if 'camera' in session['roles']%}
                         <li>
                             <a href="camera"><i class="fa fa-camera  fa-fw"></i> Surveillance</a>
                         </li>
+                        {%endif%}
                         <li>
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Website Documentation<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">

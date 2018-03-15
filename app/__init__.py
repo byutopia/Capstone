@@ -1,4 +1,4 @@
-from flask import Flask, Response, render_template, send_from_directory
+from flask import Flask, Response, render_template, send_from_directory, flash
 from flask import session, redirect, url_for, escape, request
 from flask_socketio import SocketIO
 from hashlib import md5
@@ -23,7 +23,7 @@ def create_app(debug=False):
     app.register_blueprint(wago_module)
     app.register_blueprint(camera_module)
 
-    db = MySQLdb.connect(host="localhost", user="admin", passwd="strong password", db="capstone")
+    db = MySQLdb.connect(host="localhost", user="user1", passwd="password", db="SmartCity")
     cur = db.cursor()
     class ServerError(Exception):pass
 
@@ -50,7 +50,9 @@ def create_app(debug=False):
                             .format(username_form))
                 print "MADE IT"
                 if not cur.fetchone()[0]:
-                    raise ServerError('Invalid username')
+                   # raise ServerError('Invalid username')
+                   error='Invalid Credentials'
+                   flash(u'Invalid Credentials', 'error')
 
                 password_form = request.form['password']
                 cur.execute("SELECT password FROM users WHERE username = '{}';"
@@ -59,8 +61,16 @@ def create_app(debug=False):
                 for row in cur.fetchall():
                     if md5(password_form).hexdigest() == row[0]:
                         session['username'] = request.form['username']
+                        cur.execute("SELECT roles FROM users WHERE username = '{}';".format(username_form))                            
+                        for role in cur.fetchall():
+                            session['roles'] = role[0]
+                            cur.execute("SELECT firstname FROM users WHERE username = '{}';".format(username_form))
+                            for name in cur.fetchall():
+                                session['firstname'] = name[0]
                         return redirect(url_for('index'))
-                    raise ServerError('Invalid Password')
+                    # raise ServerError('Invalid Password')
+                    error='Invalid Credentials'
+                    flash(u'Invalid Credentials', 'error')
 
         except MySQLdb.Error,e:
             print str(e)
@@ -70,11 +80,20 @@ def create_app(debug=False):
     @app.route('/logout')
     def logout():
         session.pop('username', None)
+        session.pop('roles', None)
+        session.pop('firstname', None)
+        session.clear()
+        print 'Cleared'
         return redirect(url_for('login'))
 
     @app.route('/<pagename>')
     def admin(pagename):
+        # print session['roles']
+        # if pagename in session['roles']: 
         return render_template(pagename+'.html')
+            # return render_template('index.html', session_user_name=username_session)
+        # else:
+            # return redirect(url_for('index'))
 
     @app.route('/<path:resource>')
     def serve_static_resource(resource):
