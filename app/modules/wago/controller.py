@@ -5,6 +5,9 @@ wago_mod = Blueprint('wago', __name__)
 wago_hit = False
 
 #socketio = SocketIO()
+@socketio.on('getWago')
+def sendWagoStatus():
+    socketio.emit('wagoUpdate', wago_hit)
 
 # set route
 @wago_mod.route('/wago', methods = ['GET', 'POST'])
