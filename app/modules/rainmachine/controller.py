@@ -54,6 +54,10 @@ def send_data():
 
 @rainmachine_mod.route('/rainmachine', methods = ['GET'])
 def rainmachine():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    if 'rainmachine' not in session['roles']:
+        return redirect(url_for('index'))
     data = get_all()
     if type(data) == dict:
         return render_template("rainmachine.html", rainmachineInfo = data)

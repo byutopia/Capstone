@@ -7,6 +7,7 @@
 
 <!doctype html>
 <title>Rainmachine</title>
+<div id="permissions">
 <link rel="stylesheet" type="text/css" href="css/rainmachine.css">
 
 <!-- <h3>Weather</h3> -->
@@ -105,6 +106,19 @@
 </table>
 <br>
 <br>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.slim.js"></script>
 <script src="{{ url_for('serve_static_resource', resource='js/rainmachine.js') }}"></script>
+{%if 'write' not in session['roles']%}
+<script>
+window.onload= function(){
+    document.getElementById('permissions').addEventListener("click",handler,true);
+    function handler(e){
+        e.stopPropagation();
+        e.preventDefault();
+    }
+}
+</script>
+<div id="test">{{session['roles']}}</div>
+{%endif%}
 {% endblock %}
