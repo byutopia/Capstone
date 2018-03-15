@@ -15,7 +15,14 @@ You're going to need:
  - **Linux or OS X** - Windows is slightly unsupported.
  - **Python, version 2.7** - `sudo apt-get install python2.7`
  - **Pip** - If Python is already installed, but the 'pip' command doesn't work, just run `sudo apt install python-pip`
-
+ - **MariaDB** - do the following:
+```
+sudo apt-get install software-properties-common dirmngr
+sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xF1656F24C74CD1D8
+sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://sfo1.mirrors.digitalocean.com/mariadb/repo/10.1/debian stretch main'
+sudo apt-get update
+sudo apt-get install mariadb-server libmariadbclient-dev libssl-dev
+```
 ### Getting Set Up
 1. Make your branch on GitHub if you haven't. You can do so by navigating to the git and using the branch dropdown menu.
 <p align="center">
@@ -35,7 +42,7 @@ git clone -b BRANCHNAME git@github.com:byutopia/Capstone.git OR git clone -b BRA
 If pip fails to install the dependencies on the package mysqlclient because `EnvironmentError: mysql_config not found`, run the following command:
 
 ```
-sudo apt-get install libmariadbclient-dev
+
 ```
 
 This will install the MariaDB equivalent of the mysql\_config command, which is required for the Python package.
