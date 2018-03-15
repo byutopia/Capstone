@@ -14,7 +14,7 @@ You're going to need:
 
  - **Linux or OS X** - Windows is slightly unsupported.
  - **Python, version 2.7** - `sudo apt-get install python2.7`
- - **Pip** - If Python is already installed, but the 'pip' command doesn't work, just run `sudo easy_install pip`
+ - **Pip** - If Python is already installed, but the 'pip' command doesn't work, just run `sudo apt install python-pip`
 
 ### Getting Set Up
 1. Make your branch on GitHub if you haven't. You can do so by navigating to the git and using the branch dropdown menu.
