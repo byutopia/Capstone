@@ -37,12 +37,3 @@ git clone -b BRANCHNAME git@github.com:byutopia/Capstone.git OR git clone -b BRA
 4. Install Flask and the necessary requirements by using the command, `sudo pip install -r requirements.txt`
 5. Run the app using `./utopia.py` or `python utopia.py`
 6. If the app builds successfully, navigate to 0.0.0.0:8080 to view the page.  
-
-### Troubleshooting
-If pip fails to install the dependencies on the package mysqlclient because `EnvironmentError: mysql_config not found`, run the following command:
-
-```
-
-```
-
-This will install the MariaDB equivalent of the mysql\_config command, which is required for the Python package.
