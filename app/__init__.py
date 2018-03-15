@@ -90,12 +90,12 @@ def create_app(debug=False):
 
     @app.route('/<pagename>')
     def admin(pagename):
-        print session['roles']
-        if pagename in session['roles']: 
-            return render_template(pagename+'.html')
+        # print session['roles']
+        # if pagename in session['roles']: 
+        return render_template(pagename+'.html')
             # return render_template('index.html', session_user_name=username_session)
-        else:
-            return redirect(url_for('index'))
+        # else:
+            # return redirect(url_for('index'))
 
     @app.route('/<path:resource>')
     def serve_static_resource(resource):

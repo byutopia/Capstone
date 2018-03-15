@@ -8,9 +8,9 @@
       }
      
     </style>
-
+    <div id="permissions">
     <div id="map"></div>
-    <div id="content">THIS IS WHERE CONTENT WILL GO</div>
+    </div>
 	    <script>	    	
 	      var map;
 	      var markers = [];
@@ -67,4 +67,15 @@
 	    </script>
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0Ip3If5_-0Mt5TObrCGBanY3wLzr4zQQ&callback=initMap"
 	    async defer></script>
+        {% if 'write' not in session['roles']  %}
+        <script>
+        window.onload=function(){
+            document.getElementById('permissions').addEventListener("click",handler,true);
+            function handler(e){
+                e.stopPropagation();
+                e.preventDefault();
+            }            
+        }
+        </script>
+        {%endif%}
 {% endblock %}
