@@ -67,8 +67,6 @@ def create_app(debug=False):
                             cur.execute("SELECT firstname FROM users WHERE username = '{}';".format(username_form))
                             for name in cur.fetchall():
                                 session['firstname'] = name[0]
-                        print session['firstname']
-                        print session['roles']
                         return redirect(url_for('index'))
                     # raise ServerError('Invalid Password')
                     error='Invalid Credentials'
