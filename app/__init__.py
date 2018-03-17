@@ -29,11 +29,12 @@ def create_app(debug=False):
 
     import jinja2.exceptions
 
-    #with app.app_context():  #Since the app isn't technically made before this action occurs, you make a pretend version.
     @app.route('/')
     def index():
+        # If there isn't a logged on session, force them to login.
             if 'username' not in session:
                 return redirect(url_for('login'))
+        # If someone tries to inject HTML into the session variable, reset it to the default. 
             if 'username' in session:
                 username_session = escape(session['username']).capitalize()
                 return render_template('index.html', session_user_name=username_session)
@@ -44,6 +45,10 @@ def create_app(debug=False):
             return redirect(url_for('index'))
             print 'No error'
         try:
+            # Look for a form to grab a username from (this form is in the login.html file).
+            # Grab the username and password and check it against the database. 
+            # For the password, checked the hashed data in the database against the plaintext entered. 
+            # Take the information and also create a new session that assigns permissions to the user. 
             if request.method == 'POST':
                 username_form = request.form['username']
                 print username_form
@@ -80,6 +85,7 @@ def create_app(debug=False):
 
     @app.route('/logout')
     def logout():
+        #Upon logout, destroy all active sessions.
         session.pop('username', None)
         session.pop('roles', None)
         session.pop('firstname', None)
