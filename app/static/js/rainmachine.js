@@ -94,10 +94,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 let stat = document.querySelector("#card-"+z.uid+" .status");
                 stat.classList.add("active")
                 makeTimer(z.remaining, stat, () => { socket.emit('getData'); });
-                //stat.style.opacity = 1;
             } else if (z.state == 2) { // if zone is queued to run, make card reflect that
                 let stat = document.querySelector("#card-"+z.uid+" .status");
-                //stat.style.opacity = 1;
                 stat.classList.add("active");
                 stat.textContent = "Queued";
             }
