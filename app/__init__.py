@@ -34,8 +34,9 @@ def create_app(debug=False):
     def index():
             if 'username' not in session:
                 return redirect(url_for('login'))
-            username_session = escape(session['username']).capitalize()
-            return render_template('index.html', session_user_name=username_session)
+            if 'username' in session:
+                username_session = escape(session['username']).capitalize()
+                return render_template('index.html', session_user_name=username_session)
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
