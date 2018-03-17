@@ -2,7 +2,7 @@ from flask import Blueprint, request, render_template, flash, g, session, redire
 import requests
 purpleair_mod = Blueprint('purpleair', __name__)
 #set a route
-purpleairIPs = ['192.168.20.61','192.168.20.59']
+purpleairIPs = ['10.10.109.46']
 
 ses = requests.Session()
 

@@ -6,44 +6,66 @@
       #map {
         height: 1024px;
       }
-     
+      #map-canvas{
+        width:500px;
+	height:300px;
+        padding-bottom:5px
+      }
+      .gm-style-iw {
+      	width: 200px;
+	height: 473px;
+      }
     </style>
     <div id="permissions">
     <div id="map"></div>
     </div>
-	    <script>	    	
+	    <script>
 	      var map;
 	      var markers = [];
 	      function initMap() {
 	        map = new google.maps.Map(document.getElementById('map'), {
-	          center: {lat: 40.24533 , lng: -111.644807 },
+	          center: {lat: 0 , lng: 0 },
 	          zoom: 8
 	        });
 	        //resize map to webpage
 	        google.maps.event.addDomListener(window, "resize", function() {
 			   var center = map.getCenter();
 			   google.maps.event.trigger(map, "resize");
-			   map.setCenter(center); 
+			   map.setCenter(center);
 			});
-			};
+
 	       {% for x in devices %}
-	       
+
 	       	var marker{{loop.index}} = new google.maps.Marker({
           			position: {lat: {{x.lat}}, lng: {{x.lon}} },
           			map: map,
           			ip:"http://{{x.ip}}"});
 	       	markers.push(marker{{loop.index}});
 	       	google.maps.event.addListener(marker{{loop.index}}, 'click', function() {
-				    // window.open(marker{{loop.index}}.ip);
-				    document.getElementById('content').innerHTML = getHTML(marker{{loop.index}}.ip);
-				    // document.getElementById('content').innerHTML = "Anna"
-				});
-            
-            console.log(marker{{loop.index}}.ip);
 
+
+
+		});
+
+		
+		var contentString = '<iframe src="http://{{x.ip}}" scrolling="no" style="height:615px; border: 0px none; width: 500px; margin-top: -140px; margin-left:-10px; ">' + '</iframe>';
+			var infowindow = new google.maps.InfoWindow({
+				content: contentString
+			});
+			marker{{loop.index}}.addListener('click', function() {
+				infowindow.open(map, marker{{loop.index}});
+
+
+				//window.open(marker{{loop.index}}.ip);
+				// document.getElementById('content').innerHTML = getHTML(marker{{loop.index}}.ip);
+				// document.getElementById('content').innerHTML = "Anna"
+				});
+
+            console.log(marker{{loop.index}}.ip);
 	       {% endfor %}
-	       
+
 	      }
+
 	    </script>
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0Ip3If5_-0Mt5TObrCGBanY3wLzr4zQQ&callback=initMap"
 	    async defer></script>
@@ -54,8 +76,8 @@
             function handler(e){
                 e.stopPropagation();
                 e.preventDefault();
-            }            
+            }           =
         }
         </script>
-        {%endif%}
+{%endif%}
 {% endblock %}
