@@ -23,7 +23,7 @@ def create_app(debug=False):
     app.register_blueprint(wago_module)
     app.register_blueprint(camera_module)
 
-    db = MySQLdb.connect(host="localhost", user="user1", passwd="password", db="SmartCity")
+    db = MySQLdb.connect(host="localhost", user="smartcity", passwd="manydevices", db="SmartCity")
     cur = db.cursor()
     class ServerError(Exception):pass
 
@@ -56,7 +56,6 @@ def create_app(debug=False):
                             .format(username_form))
                 print "MADE IT"
                 if not cur.fetchone()[0]:
-                   # raise ServerError('Invalid username')
                    error='Invalid Credentials'
                    flash(u'Invalid Credentials', 'error')
 
@@ -74,7 +73,6 @@ def create_app(debug=False):
                             for name in cur.fetchall():
                                 session['firstname'] = name[0]
                         return redirect(url_for('index'))
-                    # raise ServerError('Invalid Password')
                     error='Invalid Credentials'
                     flash(u'Invalid Credentials', 'error')
 
@@ -95,12 +93,7 @@ def create_app(debug=False):
 
     @app.route('/<pagename>')
     def admin(pagename):
-        # print session['roles']
-        # if pagename in session['roles']: 
         return render_template(pagename+'.html')
-            # return render_template('index.html', session_user_name=username_session)
-        # else:
-            # return redirect(url_for('index'))
 
     @app.route('/<path:resource>')
     def serve_static_resource(resource):

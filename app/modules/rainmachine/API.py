@@ -6,7 +6,6 @@ class API:
 
     access_token = False
     sid = False
-    #URL = "https://my.rainmachine.com/s/{}/{}?access_token={}"
     URI = "10.10.107.252:8080"
     URL = "https://{}/api/4/{}?access_token={}"
 
@@ -23,25 +22,16 @@ class API:
 
     # Function to get access token and cookie immediatley
     def auth(self):
-        #data = '''{
-        #    "user": {
-        #        "email": "anna.zaitzeff@gmail.com",
-        #        "pwd": "strong password",
-        #        "remember": false
-        #    }
-        #}'''
         data = '''{
             "pwd": "strong password",
             "remember": 0
         }'''
 
-        #req = self.session.post("https://my.rainmachine.com/login/auth", data=data, headers={"Content-Type": "application/json"})
         try:
 	    req = self.session.post("https://{}/api/4/auth/login".format(self.URI), data=data, headers={"Content-Type": "application/json"}, verify=False, timeout=3)
             res = req.json()
             if res["statusCode"] == 0:
                 self.access_token = res['access_token']
-                #self.sid = res['sprinklerId']
                 return {"error": 0, "message": "success"}
             else:
                 return {"error": 1, "message": "Error authenticating with Rainmachine API"}
@@ -49,12 +39,11 @@ class API:
             return {"error": 2, "message": "Error reading received JSON object"}
         except requests.exceptions.RequestException:
             return {"error": 3, "message": "Error connecting to Rainmachine"}
+
     # Since we need the cookie to work, just handle all Rainmachine API calls
     # through this class instead of the controller
     def get(self, endpoint):
-        #url = self.URL.format(self.sid, endpoint, self.access_token)
         url = self.URL.format(self.URI, endpoint, self.access_token)
-
         req = self.session.get(url, timeout=3, verify=False)
 
         try:
@@ -63,9 +52,7 @@ class API:
             return {"error": 3, "message": "Error reading received JSON object"}
 
     def post(self, endpoint, data=None):
-        #url = self.URL.format(self.sid, endpoint, self.access_token)
         url = self.URL.format(self.URI, endpoint, self.access_token)
-
         req = self.session.post(url, data=data, headers={"Content-Type": "application/json"}, timeout=3, verify=False)
 
         try:

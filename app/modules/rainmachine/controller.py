@@ -46,12 +46,14 @@ def get_all():
     except ValueError:
         return "Error reading API response"
 
-@socketio.on('getData')
+# send updated rainmachine data on page change
+@socketio.on('getData') 
 def send_data():
     data = get_all()
     if type(data) == dict:
         socketio.emit('rainmachineData', data)
 
+# return main Ui page
 @rainmachine_mod.route('/rainmachine', methods = ['GET'])
 def rainmachine():
     if 'username' not in session:
@@ -63,38 +65,6 @@ def rainmachine():
         return render_template("rainmachine.html", rainmachineInfo = {'success': 1, 'data': data})
     else: 
         return render_template("rainmachine.html", rainmachineInfo = {'success': 0, 'data': "Error reading API response"})
-
-#     if api.init['error'] != 0:
-        # return api.init['message']
-    # try:
-        # req = api.get("program")
-        # data ={}
-        # req = api.get("program") # get program information
-        # if req['error'] != 0:
-            # return req['message']
-        # else:
-            # data['program'] = req['result']
-
-        # req = api.get("zone")# get zone information
-        # if req['error'] != 0:
-            # return req['message']
-        # else:
-            # data['zone'] = req['result']
-
-        # req = api.get("zone/properties") # get zone properties
-        # if req['error'] != 0:
-            # return req['message']
-        # else:
-            # data['properties'] = req['result']
-
-        # req = api.get("mixer")# get weather mixer information
-        # if req['error'] != 0:
-            # return req['message']
-        # else:
-            # data['mixer'] = req['result']
-            # return render_template("rainmachine.html", rainmachineInfo = data)
-    # except ValueError:
-        # return "Error reading API response"
 
 @rainmachine_mod.route('/rainmachine/zstart', methods = ['POST']) # POST to start zone 
 def zstart():
@@ -138,17 +108,6 @@ def pstop():
         return json.dumps({'status': "ok"})
     else:
         return json.dumps({'status': "failed"})
-
-# @rainmachine_mod.route('/rainmachine/createProgram', methods = ['POST'])# POST to stop program
-# def createProgram():
-#     data = '{"name": ,"active": true, "startTime": , "cycles": 0, "soak": 0, "cs_on": false, "delay": 0, "delay_on": false, "status": 0, }'
-#     programID = request.get_json()["id"]# gets id from rainmachine template
-#     req = api.post("program/{programID}/start".format(programID=programID), data)# acutaly POST request
-#     print req
-#     if req:#['error'] != 0:
-#         return json.dumps({'status': "ok"})
-#     else:
-#         return json.dumps({'status': "failed"})
 
 @rainmachine_mod.route('/rainmachine/diag', methods = ['GET'])
 # get diagnostic info
