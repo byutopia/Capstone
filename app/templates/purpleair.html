@@ -1,49 +1,177 @@
-{% extends "base_layout.html" %} {% block title %} Rainmachine {% endblock %}
+ {% extends "base_layout.html" %} {% block title %} Rainmachine {% endblock %}
 {% block content %}
 <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 1024px;
+        height: 600px;
       }
-     
+      .gm-style-iw {
+      	width: 200px;
+		height: 473px;
+      }
     </style>
     <div id="permissions">
     <div id="map"></div>
     </div>
-	    <script>	    	
+	    <script>
 	      var map;
 	      var markers = [];
 	      function initMap() {
+	      	//create the google map with preset starting
+	      	//add the style for the map
 	        map = new google.maps.Map(document.getElementById('map'), {
-	          center: {lat: 40.24533 , lng: -111.644807 },
-	          zoom: 8
+	          center: {lat: 40.233845 , lng:-111.658531 },
+	          zoom: 10,
+	          styles: [
+              {
+              	elementType: 'geometry', 
+              	stylers: [{color: '#ebe3cd'}]
+              },
+              {
+              	elementType: 'labels.text.fill', 
+              	stylers: [{color: '#523735'}]
+              },
+              {
+              	elementType: 'labels.text.stroke', 
+              	stylers: [{color: '#f5f1e6'}]
+              },
+              {
+                featureType: 'administrative',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#c9b2a6'}]
+              },
+              {
+                featureType: 'administrative.land_parcel',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#dcd2be'}]
+              },
+              {
+                featureType: 'administrative.land_parcel',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#ae9e90'}]
+              },
+              {
+                featureType: 'landscape.natural',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'poi',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'poi',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#93817c'}]
+              },
+              {
+                featureType: 'poi.park',
+                elementType: 'geometry.fill',
+                stylers: [{color: '#a5b076'}]
+              },
+              {
+                featureType: 'poi.park',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#447530'}]
+              },
+              {
+                featureType: 'road',
+                elementType: 'geometry',
+                stylers: [{color: '#f5f1e6'}]
+              },
+              {
+                featureType: 'road.arterial',
+                elementType: 'geometry',
+                stylers: [{color: '#fdfcf8'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'geometry',
+                stylers: [{color: '#f8c967'}]
+              },
+              {
+                featureType: 'road.highway',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#e9bc62'}]
+              },
+              {
+                featureType: 'road.highway.controlled_access',
+                elementType: 'geometry',
+                stylers: [{color: '#e98d58'}]
+              },
+              {
+                featureType: 'road.highway.controlled_access',
+                elementType: 'geometry.stroke',
+                stylers: [{color: '#db8555'}]
+              },
+              {
+                featureType: 'road.local',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#806b63'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#8f7d77'}]
+              },
+              {
+                featureType: 'transit.line',
+                elementType: 'labels.text.stroke',
+                stylers: [{color: '#ebe3cd'}]
+              },
+              {
+                featureType: 'transit.station',
+                elementType: 'geometry',
+                stylers: [{color: '#dfd2ae'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'geometry.fill',
+                stylers: [{color: '#b9d3c2'}]
+              },
+              {
+                featureType: 'water',
+                elementType: 'labels.text.fill',
+                stylers: [{color: '#92998d'}]
+              }
+            ]
 	        });
-	        //resize map to webpage
-	        google.maps.event.addDomListener(window, "resize", function() {
-			   var center = map.getCenter();
-			   google.maps.event.trigger(map, "resize");
-			   map.setCenter(center); 
-			});
-			};
+        
+	        //create the markers
 	       {% for x in devices %}
-	       
+
 	       	var marker{{loop.index}} = new google.maps.Marker({
           			position: {lat: {{x.lat}}, lng: {{x.lon}} },
           			map: map,
           			ip:"http://{{x.ip}}"});
 	       	markers.push(marker{{loop.index}});
-	       	google.maps.event.addListener(marker{{loop.index}}, 'click', function() {
-				    // window.open(marker{{loop.index}}.ip);
-				    document.getElementById('content').innerHTML = getHTML(marker{{loop.index}}.ip);
-				    // document.getElementById('content').innerHTML = "Anna"
-				});
-            
-            console.log(marker{{loop.index}}.ip);
+	       	
 
+			// create the infowindows for each marker
+			var contentString{{loop.index}} = '<iframe src="http://{{x.ip}}" scrolling="no" style="height:615px; border: 0px none; width: 500px; margin-top: -140px; margin-left:-10px; ">' + '</iframe>';
+				var infowindow{{loop.index}} = new google.maps.InfoWindow({
+					content: contentString{{loop.index}}
+				});
+				marker{{loop.index}}.addListener('click', function() {
+					infowindow{{loop.index}}.open(map, marker{{loop.index}});
+					});
+
+<<<<<<< HEAD
 	      }
 	       {% endfor %}
 	       
+            
+	      }
+	       {% endfor %}
+
+
 	    </script>
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0Ip3If5_-0Mt5TObrCGBanY3wLzr4zQQ&callback=initMap"
 	    async defer></script>
@@ -54,8 +182,8 @@
             function handler(e){
                 e.stopPropagation();
                 e.preventDefault();
-            }            
+            }           =
         }
         </script>
-        {%endif%}
+{%endif%}
 {% endblock %}
