@@ -21,7 +21,7 @@ cursor.execute("create table IF NOT EXISTS users (userid int(11) NOT NULL AUTO_I
 cursor.execute("SET sql_notes = 1; ")
 
 # insert data into the table. The hash is the word "password" using MD5.
-cursor.execute("insert into users (username, password) values('admin','5f4dcc3b5aa765d61d8327deb882cf99');")
+cursor.execute("insert into users (firstname, lastname, dept, username, password, roles) values('User', 'userLastname', 'ADMIN','admin','5f4dcc3b5aa765d61d8327deb882cf99', '{"rainmachine":"read", "rainmachine":"write", "purpleair":"read", "purpleair":"write", "wago":"read", "wago":"write", "camera":"read", "camera":"write"}');")
 
 # create a new user that only has privileges for that specific database.
 cursor.execute("create user 'smartcity'@'localhost';")
