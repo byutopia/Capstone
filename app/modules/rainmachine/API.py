@@ -1,34 +1,35 @@
 import requests
 import urllib3
+from ... import _config
 requests.adapters.DEFAULT_RETRIES = 2
 requests.packages.urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-class API:
-
-    access_token = False
-    sid = False
-    URI = "10.10.107.252:8080"
-    URL = "https://{}/api/4/{}?access_token={}"
-
-    email = "salsahonor@gmail.com"
-    pwd = "strong password"
-
-    init = False
-
-    # Have to use a session because Rainmachine uses a cookie to authenticate
-    session = requests.Session()
+class API():
 
     def __init__(self):
+        self.access_token = False
+        self.sid = False
+        self.URI = _config.rainmachine['address'] + ":8080"
+        self.URL = "https://{}/api/4/{}?access_token={}"
+
+        self.email = _config.rainmachine['email']
+        self.pwd = _config.rainmachine['pwd']
+
+        # Have to use a session because Rainmachine uses a cookie to authenticate
+        self.session = requests.Session()
+
         self.init = self.auth()
 
     # Function to get access token and cookie immediatley
     def auth(self):
-        data = '''{
-            "pwd": "strong password",
+        # since this string will be formatted, the data needs double brackets
+        # because otherwise python will try to format the whole thing
+        data = '''{{
+            "pwd": "{0}",
             "remember": 0
-        }'''
+        }}'''
 
         try:
-	    req = self.session.post("https://{}/api/4/auth/login".format(self.URI), data=data, headers={"Content-Type": "application/json"}, verify=False, timeout=3)
+	    req = self.session.post("https://{}/api/4/auth/login".format(self.URI), data=data.format(self.pwd), headers={"Content-Type": "application/json"}, verify=False, timeout=3)
             res = req.json()
             if res["statusCode"] == 0:
                 self.access_token = res['access_token']
