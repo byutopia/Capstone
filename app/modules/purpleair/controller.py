@@ -1,8 +1,10 @@
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for
 import requests
+from ... import _config
 purpleair_mod = Blueprint('purpleair', __name__)
 #the ips to get for each device
-purpleairIPs = ['192.168.20.61', '192.168.20.59']
+#purpleairIPs = ['192.168.20.61', '192.168.20.59']
+purpleairIPs = _config.purpleair['addresses']
 #10.10.109.46
 
 ses = requests.Session()
