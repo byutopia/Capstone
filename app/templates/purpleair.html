@@ -1,4 +1,4 @@
- {% extends "base_layout.html" %} {% block title %} Rainmachine {% endblock %}
+ {% extends "base_layout.html" %} {% block title %} Purple Air {% endblock %}
 {% block content %}
 <style>
       /* Always set the map height explicitly to define the size of the div
@@ -166,18 +166,17 @@
           }
 	       {% endfor %}
 
-
 	    </script>
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0Ip3If5_-0Mt5TObrCGBanY3wLzr4zQQ&callback=initMap"
 	    async defer></script>
-        {% if 'write' not in session['roles']  %}
+        {% if '"purpleair":"write"' not in session['roles']  %}
         <script>
         window.onload=function(){
             document.getElementById('permissions').addEventListener("click",handler,true);
             function handler(e){
                 e.stopPropagation();
                 e.preventDefault();
-            }           =
+            }          
         }
         </script>
         {%endif%}

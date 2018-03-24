@@ -1,4 +1,4 @@
-{% extends "base_layout.html" %} {% block title %} Rainmachine {% endblock %}
+{% extends "base_layout.html" %} {% block title %} Camera {% endblock %}
 {% block content %}
 <div id="permissions">
 <div class="container-fluid">
@@ -9,7 +9,7 @@
         </div>
     </div>
 </div>
-{% if 'write' not in session['roles']  %}
+{% if '"camera":"write"' not in session['roles']  %}
 <script>
 window.onload= function(){
     document.getElementById('permissions'.addEventListener("click",handler,true);
