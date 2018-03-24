@@ -3,89 +3,175 @@
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/timeline.css') }}">
     <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/morris.css') }}">
-    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/bebasneue.css')}}"
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/bebasneue.css')}}">
+    <!-- <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/bootstrap.min.css') }}"> -->
     <link rel="shortcut icon" href="{{ url_for('serve_static_resource', resource='static/images/favicon.ico') }}">
-{% endblock %}
+    <style>
+    #carouselindex {
+      background-color: white;
+      width: 30rem;
+      height: 24rem;
+      margin-left: 7rem;
+    }
+    #carcon {
+      padding-top: 10rem;
+      color: white;
+    }
+    #cityscape {
+      height: 24rem;
+    }
+    #suburban {
+      height: 24rem;
+    }
+    #wagowago {
+      height: 24rem;
+    }
+    #rainrain {
+      height: 24rem;
+    }
+    #purplepurple {
+      height: 24rem;
+    }
+    #tabbies {
+      width: 195rem;
+      height: 35rem;
+    }
+    #jumbo {
+      text-align: center;
+    }
+    #learnmore {
+      padding-left: 5rem;
+    }
+    #indexstyle {
+      overflow-y: hidden;
+      overflow-x: hidden;
+      display: block;
+    }
+    #jumbotrondiv {
+      width: 97rem;
+    }
+    </style>
+    {% endblock %}
 {% block content %}
+<div id="indexstyle">
+<br>
+<br>
+<!-- Start of Jumbotron -->
+<div id="jumbotrondiv">
 <div class="row">
+    <div class="col-lg-12">
+        <div class="jumbotron">
+            <p id="jumbo">Around the world, technology is changing. With that change, a rapid advancement in city-wide solutions has arrived at our front door. UTOPIA Fiber has made it their mission to establish a foothold in this arena, fast-tracking the development of a console that operates, interfaces, and regulates many of the devices that are already industry standard amongst progressive cities. </p>
+            <div id="learnmore">
+            <p><a href="https://www.google.com/url?q=https://www.heraldextra.com/news/local/central/orem/orem-teams-with-purple-air-to-give-residents-localized-air/article_7efe0f73-fc27-5670-838f-36ee87744b6f.html&sa=D&source=hangouts&ust=1521997623957000&usg=AFQjCNFCLYlUsZvkw3Y0nOCkWqMGNoA-tQ" class="btn btn-default btn-lg" role="button">Learn more</a></p>
+          </div>
+        </div>
+    </div>
+  </div>
 </div>
-<h1 style="text-align: center; font-family: BebasNeueBold; font-size: 8rem; ">UTOPIA Fiber Smart City Console</h1>
-<!-- /.row -->
-<div class="row">
-    <div class="col-lg-4">
-        <div class="panel panel-green">
-            <div class="panel-heading">
-                News
-            </div>
-            <div class="panel-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-            </div>
-        </div>
-    </div>
-    <!-- /.col-lg-4 -->
-    <div class="col-lg-4">
-        <div class="panel panel-green">
-            <div class="panel-heading">
-                Notifications
-            </div>
-            <div class="panel-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-            </div>
-        </div>
-    </div>
-    <!-- /.col-lg-4 -->
-    <div class="col-lg-4">
-        <div class="panel panel-green">
-            <div class="panel-heading">
-                Blog
-            </div>
-            <div class="panel-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue. </p>
-            </div>
-        </div>
-    </div>
-    <!-- /.col-lg-4 -->
-</div>
-<video id="capvideo" controls="" poster="{{ url_for('serve_static_resource', resource='static/images/blackground.jpg')}}">
+    <!-- /.col-lg-12 -->
+<!-- End of Jumbotron -->
+<video id="capvideo" controls="" poster="{{ url_for('serve_static_resource', resource='static/images/mainLogo.png')}}">
 <source src="{{ url_for('serve_static_resource', resource='static/videos/capvideo.mp4')}}" type="video/mp4">
 </video>
-<!-- <div class="row">
-    <div class="col-lg-8">
-        <div class="panel panel-default">
+<!--End of Jumbo + Video Div -->
+<br><br>
+<div id="carouselindex" class="carousel slide">
+  <ol class="carousel-indicators" style="margin-bottom: -2rem;">
+    <li data-target="#carouselindex" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselindex" data-slide-to="1"></li>
+    <li data-target="#carouselindex" data-slide-to="2"></li>
+    <li data-target="#carouselindex" data-slide-to="3"></li>
+    <li data-target="#carouselindex" data-slide-to="4"></li>
+  </ol>
+  </ol>
+  </ol>
+  </ol>
+  <div class="carousel-inner">
+    <div class="item active">
+      <img id="cityscape" class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/cityscape.jpg')}}" alt="First slide">
+    </div>
+    <div class="item">
+      <img id="wagowago" class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/wagowago.jpg')}}" alt="Second slide">
+    </div>
+    <div class="item">
+      <img id="suburban"  class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/suburban.jpg')}}" alt="Third slide">
+    </div>
+    <div class="item">
+      <img id="rainrain"  class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/rainrain.jpg')}}" alt="Fourth slide">
+    </div>
+    <div class="item">
+      <img id="purplepurple"  class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/purplepurple.jpeg')}}" alt="Fifth Slide">
+    </div>
+  </div>
+  <a class="left carousel-control" href="#carouselindex" data-slide="prev">
+    <span id="carcon" class="fa fa-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carouselindex" data-slide="next">
+    <span id="carcon" class="fa fa-chevron-right"></span>
+  </a>
+</div>
+<br>
+<br>
+<!--- Beginning of Tabs -->
+<div id="tabbies">
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-green">
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
-                <div class="pull-right">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                            Actions
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li><a href="#">Action</a>
-                            </li>
-                            <li><a href="#">Another action</a>
-                            </li>
-                            <li><a href="#">Something else here</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a>
-                            </li>
-                        </ul>
+              Devices
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#rainmachine" data-toggle="tab" style="color: black;">Rainmachine</a>
+                    </li>
+                    <li><a href="#purpleair" data-toggle="tab" style="color: black;">Purpleair</a>
+                    </li>
+                    <li><a href="#wago" data-toggle="tab" style="color: black;">Wago</a>
+                    </li>
+                    <li><a href="#foscam" data-toggle="tab" style="color: black;">Foscam</a>
+                    </li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="rainmachine">
+                        <h4>Rainmachine</h4>
+                        <p>In short, traditional irrigation controllers are hard to setup, difficult to operate, dumb machines that run primitive watering programs. In fact, irrigation controllers are known to be one of the most hated home automation devices. <br><br> In layman’s terms, the RainMachine takes something that is given (base watering duration) with something it learns (weather data) and produces an output that augments nature’s cycle in such a way that your garden is protected and nourished to perfection. <br><br> All of this and more, makes the Rainmachine an ideal device to attach to UTOPIA Fiber's Smart City project.</p>
+                        <a style="color: inherit;" type="button" class="btn btn-outline btn-default" href="http://www.rainmachine.com/">Read More</a>
+                    </div>
+                    <div class="tab-pane fade" id="purpleair">
+                        <h4>Purpleair</h4>
+                        <p>Using a new generation of laser particle counters to provide real time measurement of (amongst other data), PM1.0, PM2.5 and PM10. PurpleAir sensors are easy to install, requiring a power outlet and WiFi. They use WiFi to report in real time to the PurpleAir Map. <br><br> PurpleAir sensors use a fan to draw air past a laser, causing reflections from any particles in the air. These reflections are used to count particles in six sizes between 0.3μm and 10μm diameter. Using one second particle counts, estimated total mass for PM1.0, PM2.5 and PM10 is averaged by the PurpleAir Internet of Things (IOT) control board. Readings are then uploaded to the cloud every 80 seconds or so where they are stored for download and display on the PurpleAir map. <br><br> This makes PurpleAir the standard to be compared to in the air pollution monitor market.</p>
+                          <a style="color: inherit;" type="button" class="btn btn-outline btn-default" href="https://www.purpleair.com/">Read More</a>
+                    </div>
+                    <div class="tab-pane fade" id="wago">
+                        <h4>Wago</h4>
+                        <p>X-COM® and X-COM® S, as well as X-COM® S MINI pluggable rail-mount terminal blocks are the modular system for time- and cost-saving system wiring. X-COM® systems are ideal for system wiring especially in switchgear and control applications (e.g., railway technology).<br><br> The pre-assembled and pluggable X-COM® and X-COM® S systems offer X good reasons for using them: On the one hand, connectors can be pre-assembled independently of the final assembly and pre-assembled groups can be tested before assembly. On the other hand, components can be quickly and reliably replaced via 100% mismating and touch-proof protection. This not only saves time and money, but also allows assembly by non-specialists. Even components that are not mounted on a DIN 35 carrier rail can be easily incorporated into the system wiring via X-COM®. <br><br> X-COM® – WAGO's wide range of pluggable rail-mount terminal blocks equipped with the proven CAGE CLAMP® connection.<br><br> X-COM® S – Benefit from a much more compact design, as well as Push-in CAGE CLAMP® S connection for direct termination of solid or ferruled conductors.
+                        </p>
+                          <a style="color: inherit;" type="button" class="btn btn-outline btn-default" href="http://www.wago.us/">Read More</a>
+                    </div>
+                    <div class="tab-pane fade" id="foscam">
+                        <h4>Foscam</h4>
+                        <p>Having trouble with surveillance? Foscam's solution of smart, ethernet-enabled cameras has become a state of the art answer for home, business and city security. <br><br>Advanced image sensor and Ambarella chip processes 4.0 megapixel streaming video efficiently. Compared to 1080P camera, you can see much sharper video and get more details. <br><br>Advanced WDR 2.0 technology helps optimize image quality under a wide range of lighting conditions. Objects in the extremely bright and dark areas or in backlight situations can be visible for you. <br><br> With the help of PoE technology, this camera can be powered by Ethernet cable. Wiring work becomes easier for you. When this camera works with Foscam Waterproof Junction Box, a small drilling hole for the cables on the wall is enough, which minimizes the damage to your home's interior design. <br><br> </p>
+                          <a style="color: inherit;" type="button" class="btn btn-outline btn-default" href="https://www.foscam.com/">Read More</a>
                     </div>
                 </div>
             </div>
-
-            <div class="panel-body">
-                <div id="morris-area-chart"></div>
-            </div>
+            <!-- /.panel-body -->
         </div>
-      </div>
-    </div> -->
-
-<!-- /.row -->{% endblock %}
+        <!-- /.panel -->
+    </div>
+</div>
+</div>
+<!-- End of Tabs -->
+</div>
+{% endblock %}
 {% block js %}
     {{ super() }}
     <script src="{{ url_for('serve_static_resource', resource='js/raphael-min.js')}}"></script>
     <script src="{{ url_for('serve_static_resource', resource='js/morris.min.js')}}"></script>
     <script src="{{ url_for('serve_static_resource', resource='js/morris-data.js')}}"></script>
+    <!-- <script src="{{ url_for('serve_static_resource', resource='js/bootstrap.min.js')}}"></script> -->
 {% endblock %}
