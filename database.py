@@ -3,7 +3,7 @@ import MySQLdb
 # Make sure to sudo pip install -r requirements.txt again if you haven't recently. 
 #You'll need mysql on your computer as well as mysql-python (mixed OS) or python-mysqldb (ubuntu)
 # Open database connection ( If database is not created just leave "yourdbname"as it is.)
-db = MySQLdb.connect(user="root",db="mysql")
+db = MySQLdb.connect(user="root", db="mysql")
 
 # prepare a cursor object using cursor() method
 cursor = db.cursor()
@@ -12,7 +12,7 @@ cursor = db.cursor()
 # Below line  is hide your warning
 cursor.execute("SET sql_notes = 0; ")
 # create db here....
-cursor.execute("create database IF NOT EXISTS SmartCity")
+cursor.execute("CREATE DATABASE IF NOT EXISTS SmartCity")
 cursor.execute("USE SmartCity")
 
 # create table
@@ -21,7 +21,7 @@ cursor.execute("CREATE TABLE IF NOT EXISTS users (userid int(11) NOT NULL AUTO_I
 cursor.execute("SET sql_notes = 1; ")
 
 # insert data into the table. The hash is the word "password" using MD5.
-cursor.execute("insert into users (username, password) values('admin','5f4dcc3b5aa765d61d8327deb882cf99');")
+cursor.execute("insert into users (firstname, lastname, dept, username, password, roles) values('User', 'userLastname', 'ADMIN','admin','5f4dcc3b5aa765d61d8327deb882cf99', '{"rainmachine":"read", "rainmachine":"write", "purpleair":"read", "purpleair":"write", "wago":"read", "wago":"write", "camera":"read", "camera":"write"}');")
 
 # create a new user that only has privileges for that specific database.
 cursor.execute("create user 'smartcity'@'localhost';")
