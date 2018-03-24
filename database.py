@@ -3,7 +3,7 @@ import MySQLdb
 # Make sure to sudo pip install -r requirements.txt again if you haven't recently. 
 #You'll need mysql on your computer as well as mysql-python (mixed OS) or python-mysqldb (ubuntu)
 # Open database connection ( If database is not created just leave "yourdbname"as it is.)
-db = MySQLdb.connect("localhost", "root", "password", "SmartCity" )
+db = MySQLdb.connect(user="root",db="mysql")
 
 # prepare a cursor object using cursor() method
 cursor = db.cursor()
@@ -13,10 +13,11 @@ cursor = db.cursor()
 cursor.execute("SET sql_notes = 0; ")
 # create db here....
 cursor.execute("create database IF NOT EXISTS SmartCity")
+cursor.execute("USE SmartCity")
 
 # create table
 cursor.execute("SET sql_notes = 0; ")
-cursor.execute("create table IF NOT EXISTS users (userid int(11) NOT NULL AUTO_INCREMENT, firstname varchar((20), lastname varchar(20), dept varchar(15), username varchar(15), password varchar(32), roles varchar(10000), PRIMARY KEY (userid));")
+cursor.execute("CREATE TABLE IF NOT EXISTS users (userid int(11) NOT NULL AUTO_INCREMENT, firstname varchar(20), lastname varchar(20), dept varchar(15), username varchar(15), password varchar(32), roles varchar(10000), PRIMARY KEY (userid));")
 cursor.execute("SET sql_notes = 1; ")
 
 # insert data into the table. The hash is the word "password" using MD5.
