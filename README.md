@@ -35,5 +35,6 @@ git clone -b BRANCHNAME git@github.com:byutopia/Capstone.git OR git clone -b BRA
 ```
 3. `cd Capstone`
 4. Install Flask and the necessary requirements by using the command, `sudo pip install -r requirements.txt`
+7. Run the Database build script using: `python database.py`
 5. Run the app using `./utopia.py` or `python utopia.py`
 6. If the app builds successfully, navigate to 0.0.0.0:8080 to view the page.  

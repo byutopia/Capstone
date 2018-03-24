@@ -3,15 +3,17 @@ from flask import session, redirect, url_for, escape, request
 from flask_socketio import SocketIO
 from hashlib import md5
 import json
-import MySQLdb
+
+import includes.config as _config
+import includes.db as _db
 
 socketio = SocketIO()
-
+DB = _db.DBC()
 
 def create_app(debug=False):
     app = Flask(__name__, static_folder='static', template_folder='templates')
     app.debug = debug
-    app.config["SECRET_KEY"] = 'strong secret'
+    app.config["SECRET_KEY"] = _config.app['secret_key']
 
     from modules.rainmachine.controller import rainmachine_mod as rainmachine_module
     from modules.purpleair.controller import purpleair_mod as purpleair_module
@@ -23,8 +25,6 @@ def create_app(debug=False):
     app.register_blueprint(wago_module)
     app.register_blueprint(camera_module)
 
-    db = MySQLdb.connect(host="localhost", user="smartcity", passwd="manydevices", db="SmartCity")
-    cur = db.cursor()
     class ServerError(Exception):pass
 
     import jinja2.exceptions
@@ -51,34 +51,25 @@ def create_app(debug=False):
             # Take the information and also create a new session that assigns permissions to the user. 
             if request.method == 'POST':
                 username_form = request.form['username']
-                print username_form
-                cur.execute("SELECT COUNT(1) FROM users WHERE username = '{}';"
-                            .format(username_form))
-                print "MADE IT"
-                if not cur.fetchone()[0]:
-                   error='Invalid Credentials'
-                   flash(u'Invalid Credentials', 'error')
-
                 password_form = request.form['password']
-                cur.execute("SELECT password FROM users WHERE username = '{}';"
-                            .format(username_form))
-
-                for row in cur.fetchall():
-                    if md5(password_form).hexdigest() == row[0]:
-                        session['username'] = request.form['username']
-                        cur.execute("SELECT roles FROM users WHERE username = '{}';".format(username_form))                            
-                        for role in cur.fetchall():
-                            session['roles'] = role[0]
-                            cur.execute("SELECT firstname FROM users WHERE username = '{}';".format(username_form))
-                            for name in cur.fetchall():
-                                session['firstname'] = name[0]
-                        return redirect(url_for('index'))
-                    error='Invalid Credentials'
+                check = DB.loginCheck(username_form, password_form)
+                if check['status'] == 0:
+                    session['username'] = username_form
+                    session['firstname'] = check['data']['firstname']
+                    session['roles'] = check['data']['roles']
+                    return redirect(url_for('index'))
+                elif check['status'] == 1:
+                    flash(u'Missing Credentials', 'error')
+                elif check['status'] == 2:
                     flash(u'Invalid Credentials', 'error')
-
-        except MySQLdb.Error,e:
-            print str(e)
-            return "I'm broken you hurt me :("
+                elif check['status'] == -1:
+                    flash(check['message'], 'error')
+                else:
+                    flash(u'Server error', 'error')
+                
+        except:
+            import sys
+            return "I'm broken you hurt me :(\n %s" % sys.exc_info()[1]
         return render_template('login.html')
 
     @app.route('/logout')
