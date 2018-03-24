@@ -10,7 +10,8 @@ purpleairIPs = _config.purpleair['addresses']
 ses = requests.Session()
 
 def getCordsByIP(IPs):
-	cordsAndIP = []
+	#empty this for the actual project these IPs are for the class presentation only
+	cordsAndIP = [{'ip':'192.168.1.40','lat':40.247823, 'lon': -111.646431 }, {'ip':'192.168.1.41', 'lat':40.248376,'lon': -111.646968}]
 	URL = "http://{}/json"
 	#get lat and lon by ip
 	for ip in IPs:
