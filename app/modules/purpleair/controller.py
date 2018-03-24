@@ -20,6 +20,7 @@ def getCordsByIP(IPs):
 			url = URL.format(ip)
 			#make a request for the purple air data
 			req = ses.get(url, timeout=3, verify=False)
+
 			res = req.json()
 			lat = res['lat']
 			lon = res['lon']
@@ -27,9 +28,8 @@ def getCordsByIP(IPs):
 			cordsAndIP.append({'ip':ip,'lat':lat, 'lon': lon})
 		except ValueError:
 			return{"error": 2, "message": "Error reading received JSON object"}
-		except requests.exceptions.RequestException:
-			print "Error: could not connect to IP "
-			print ip
+		except requests.exceptions.RequestException as e:
+			print e
 	return cordsAndIP
 
 purpleairDevices = getCordsByIP(purpleairIPs)
