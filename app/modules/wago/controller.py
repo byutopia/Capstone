@@ -20,8 +20,10 @@ def wago():
         return 'ok'
 
     else:
+        # prevents someone who is not logged in from getting access by typing the URL
         if 'username' not in session:
             return redirect(url_for('login'))
+        # checks for wago access in roles, otherwise directs to index
         if 'wago' not in session['roles']:
             return redirect(url_for('index'))
 

@@ -55,11 +55,16 @@ def create_app(debug=False):
                 check = DB.loginCheck(username_form, password_form)
                 if check['status'] == 0:
                     session['username'] = username_form
+                    # session variable for Display name
                     session['firstname'] = check['data']['firstname']
+                    # session variable for role based access
                     session['roles'] = check['data']['roles']
+                    # redirect to main page
                     return redirect(url_for('index'))
+                # throws errors if not all fields in login are filled out
                 elif check['status'] == 1:
                     flash(u'Missing Credentials', 'error')
+                # throws error if invalid credentials for login
                 elif check['status'] == 2:
                     flash(u'Invalid Credentials', 'error')
                 elif check['status'] == -1:
@@ -74,7 +79,7 @@ def create_app(debug=False):
 
     @app.route('/logout')
     def logout():
-        #Upon logout, destroy all active sessions.
+        # Upon logout, destroy all active sessions.
         session.pop('username', None)
         session.pop('roles', None)
         session.pop('firstname', None)

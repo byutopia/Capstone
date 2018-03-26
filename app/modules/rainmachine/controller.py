@@ -56,8 +56,10 @@ def send_data():
 # return main Ui page
 @rainmachine_mod.route('/rainmachine', methods = ['GET'])
 def rainmachine():
+    # prevents people who are not logged in to type in URL directly
     if 'username' not in session:
         return redirect(url_for('login'))
+    #must have rainmachine in their roles in order access this page
     if 'rainmachine' not in session['roles']:
         return redirect(url_for('index'))
     data = get_all()
