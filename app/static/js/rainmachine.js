@@ -80,9 +80,11 @@ function makeTimer(duration, display, callback) {
             clearInterval(timerInt);
         }
     }, 1000);
+    return timerInt;
 }
 
 document.addEventListener("DOMContentLoaded", function() {
+    var timers = {}
 	var socket = io.connect('http://' + document.domain + ':' + location.port);
     socket.on('connect', function() {
         console.log("Socket connected!");
@@ -90,23 +92,43 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     socket.on('rainmachineData', function(data) {
         for (let z of data.zone.zones) { // iterate over zones
-            if (z.state == 1 && z.uid != 1) { // if zone is running and isn't zone 1, make a timer
-                let stat = document.querySelector("#card-"+z.uid+" .status");
-                stat.classList.add("active")
-                makeTimer(z.remaining, stat, () => { socket.emit('getData'); });
+            let stat = document.querySelector("#card-"+z.uid+" .status");
+            if (z.state == 1) { // if zone is running and isn't zone 1, make a timer
+                if (z.uid == 1) {
+                    stat.classList.add("active");
+                    stat.textContent = "Running";
+                } else {
+                    if (!timers["card-"+z.uid] || timers["card-"+z.uid] == 0) {
+                        stat.classList.add("active")
+                        timers["card-"+z.uid] = makeTimer(z.remaining, stat, () => { 
+                            timers["card-"+z.uid] = 0;
+                            socket.emit('getData'); 
+                        });
+                    }
+                }
             } else if (z.state == 2) { // if zone is queued to run, make card reflect that
-                let stat = document.querySelector("#card-"+z.uid+" .status");
                 stat.classList.add("active");
                 stat.textContent = "Queued";
+            } else if (z.state == 0) { // if zone is inactive
+                if (stat.classList.contains("active")) {
+                    if (timers["card-"+z.uid] > 0) {
+                        clearInterval(timers["card-"+z.uid])
+                        timers["card-"+z.uid] = 0;
+                        stat.classList.remove("active");
+                        stat.textContent = "Inactive";
+                    }
+                }
             }
         }
     });
 	socket.on('rainmachineUpdate', function(msg) { // when either start or stop is pressed
         if (msg.type === 'zone') {
             if (msg.data.status === 'started') {
-                socket.emit('getData');
+                socket.emit('getData')
+                setTimeout(() => { socket.emit('getData') }, 3000);
             } else if (msg.data.status === 'stopped') {
-                socket.emit('getData');
+                socket.emit('getData')
+                setTimeout(() => { socket.emit('getData') }, 3000);
             }
         } else if (msg.type === 'program') {
             var stat = document.querySelector("#program-"+(msg.data.programID+1)+" .state");
@@ -118,3 +140,4 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
