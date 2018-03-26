@@ -353,8 +353,10 @@ table.dataTable thead .sorting:after {
     color: #df8a13;
 }
 #capvideo {
-  position: relative;
-  width: 80rem;
-  height: 45rem;
-
+  width: 36rem;
+  /* float: right; */
+  margin-top: 6rem;
+  position: absolute;
+  margin-left: 54rem;
+  height: 22rem;
 }
