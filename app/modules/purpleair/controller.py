@@ -10,7 +10,8 @@ purpleairIPs = _config.purpleair['addresses']
 ses = requests.Session()
 
 def getCordsByIP(IPs):
-	cordsAndIP = []
+	#empty this for the actual project these IPs are for the class presentation only
+	cordsAndIP = [{'ip':'192.168.1.40','lat':40.247823, 'lon': -111.646431 }, {'ip':'192.168.1.41', 'lat':40.248376,'lon': -111.646968}]
 	URL = "http://{}/json"
 	#get lat and lon by ip
 	for ip in IPs:
@@ -19,6 +20,7 @@ def getCordsByIP(IPs):
 			url = URL.format(ip)
 			#make a request for the purple air data
 			req = ses.get(url, timeout=3, verify=False)
+
 			res = req.json()
 			lat = res['lat']
 			lon = res['lon']
@@ -26,9 +28,8 @@ def getCordsByIP(IPs):
 			cordsAndIP.append({'ip':ip,'lat':lat, 'lon': lon})
 		except ValueError:
 			return{"error": 2, "message": "Error reading received JSON object"}
-		except requests.exceptions.RequestException:
-			print "Error: could not connect to IP "
-			print ip
+		except requests.exceptions.RequestException as e:
+			print e
 	return cordsAndIP
 
 purpleairDevices = getCordsByIP(purpleairIPs)
