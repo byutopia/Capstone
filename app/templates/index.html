@@ -17,21 +17,6 @@
       padding-top: 10rem;
       color: white;
     }
-    #cityscape {
-      height: 24rem;
-    }
-    #suburban {
-      height: 24rem;
-    }
-    #wagowago {
-      height: 24rem;
-    }
-    #rainrain {
-      height: 24rem;
-    }
-    #purplepurple {
-      height: 24rem;
-    }
     #tabbies {
       width: 195rem;
       height: 35rem;
@@ -46,6 +31,7 @@
       overflow-y: hidden;
       overflow-x: hidden;
       display: block;
+      margin-left: inherit;
     }
     #jumbotrondiv {
       width: 97rem;
@@ -89,19 +75,19 @@
   </ol>
   <div class="carousel-inner">
     <div class="item active">
-      <img id="cityscape" class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/cityscape.jpg')}}" alt="First slide">
+      <img class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/cityscape.jpg')}}" alt="First slide">
     </div>
     <div class="item">
-      <img id="wagowago" class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/wagowago.jpg')}}" alt="Second slide">
+      <img class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/wagowago.jpg')}}" alt="Second slide">
     </div>
     <div class="item">
-      <img id="suburban"  class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/suburban.jpg')}}" alt="Third slide">
+      <img class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/suburban.jpg')}}" alt="Third slide">
     </div>
     <div class="item">
-      <img id="rainrain"  class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/rainrain.jpg')}}" alt="Fourth slide">
+      <img class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/rainrain.jpg')}}" alt="Fourth slide">
     </div>
     <div class="item">
-      <img id="purplepurple"  class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/purplepurple.jpeg')}}" alt="Fifth Slide">
+      <img class="d-block w-100" src="{{ url_for('serve_static_resource', resource='static/images/purplepurple.jpg')}}" alt="Fifth Slide">
     </div>
   </div>
   <a class="left carousel-control" href="#carouselindex" data-slide="prev">
@@ -131,8 +117,6 @@
                     </li>
                     <li><a href="#wago" data-toggle="tab" style="color: black;">Wago</a>
                     </li>
-                    <li><a href="#foscam" data-toggle="tab" style="color: black;">Foscam</a>
-                    </li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
@@ -151,11 +135,6 @@
                         <p>X-COM® and X-COM® S, as well as X-COM® S MINI pluggable rail-mount terminal blocks are the modular system for time- and cost-saving system wiring. X-COM® systems are ideal for system wiring especially in switchgear and control applications (e.g., railway technology).<br><br> The pre-assembled and pluggable X-COM® and X-COM® S systems offer X good reasons for using them: On the one hand, connectors can be pre-assembled independently of the final assembly and pre-assembled groups can be tested before assembly. On the other hand, components can be quickly and reliably replaced via 100% mismating and touch-proof protection. This not only saves time and money, but also allows assembly by non-specialists. Even components that are not mounted on a DIN 35 carrier rail can be easily incorporated into the system wiring via X-COM®. <br><br> X-COM® – WAGO's wide range of pluggable rail-mount terminal blocks equipped with the proven CAGE CLAMP® connection.<br><br> X-COM® S – Benefit from a much more compact design, as well as Push-in CAGE CLAMP® S connection for direct termination of solid or ferruled conductors.
                         </p>
                           <a style="color: inherit;" type="button" class="btn btn-outline btn-default" href="http://www.wago.us/">Read More</a>
-                    </div>
-                    <div class="tab-pane fade" id="foscam">
-                        <h4>Foscam</h4>
-                        <p>Having trouble with surveillance? Foscam's solution of smart, ethernet-enabled cameras has become a state of the art answer for home, business and city security. <br><br>Advanced image sensor and Ambarella chip processes 4.0 megapixel streaming video efficiently. Compared to 1080P camera, you can see much sharper video and get more details. <br><br>Advanced WDR 2.0 technology helps optimize image quality under a wide range of lighting conditions. Objects in the extremely bright and dark areas or in backlight situations can be visible for you. <br><br> With the help of PoE technology, this camera can be powered by Ethernet cable. Wiring work becomes easier for you. When this camera works with Foscam Waterproof Junction Box, a small drilling hole for the cables on the wall is enough, which minimizes the damage to your home's interior design. <br><br> </p>
-                          <a style="color: inherit;" type="button" class="btn btn-outline btn-default" href="https://www.foscam.com/">Read More</a>
                     </div>
                 </div>
             </div>
