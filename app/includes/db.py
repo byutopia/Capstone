@@ -19,8 +19,8 @@ class DBC():
         if not username or not password:
             return {'status': 1}
         try:
-            check = self.database.getSingleRow("SELECT COUNT(1) FROM users WHERE username = '{usr}' AND password = MD5('{pwd}')".format(usr=username, pwd=password))
-            if check:
+            check = self.database.getSingleRow("SELECT COUNT(1) AS 'exists' FROM users WHERE username = '{usr}' AND password = MD5('{pwd}')".format(usr=username, pwd=password))
+            if check["exists"]:
                 data = self.database.getSingleRow("SELECT firstname, roles FROM users WHERE username = '{}'".format(username))
                 return {'status': 0, 'data': data}
             else:

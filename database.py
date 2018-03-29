@@ -17,7 +17,7 @@ cursor.execute("USE SmartCity")
 
 # create table
 cursor.execute("SET sql_notes = 0; ")
-cursor.execute("create table IF NOT EXISTS users (userid int(11) NOT NULL AUTO_INCREMENT, firstname varchar(20), lastname varchar(20), dept varchar(15), username varchar(15), password varchar(32), roles varchar(10000), PRIMARY KEY (userid));")
+cursor.execute("CREATE TABLE IF NOT EXISTS users (userid int(11) NOT NULL AUTO_INCREMENT, firstname varchar(20), lastname varchar(20), dept varchar(15), username varchar(15), password varchar(32), roles varchar(10000), PRIMARY KEY (userid));")
 cursor.execute("SET sql_notes = 1; ")
 
 # insert data into the table. The hash is the word "password" using MD5.
