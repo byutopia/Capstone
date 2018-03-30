@@ -35,9 +35,10 @@ def getCordsByIP(IPs):
 purpleairDevices = getCordsByIP(purpleairIPs)
 @purpleair_mod.route('/purpleair', methods = ['GET'])
 def purpleair():
-	#check the user credentials
+    # check the user credentials
     if 'username' not in session:
         return redirect(url_for('login'))
+    # checks for purpleair access in roles
     if 'purpleair' not in session['roles']:
         return redirect(url_for('index'))
     #return the template with device data
