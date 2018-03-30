@@ -143,7 +143,7 @@
               }
             ]
 	        });
-          }
+          
 	        //create the markers
 	       {% for x in devices %}
 
@@ -163,9 +163,9 @@
 					infowindow{{loop.index}}.open(map, marker{{loop.index}});
 					});
 
-          }
+          
 	       {% endfor %}
-
+	    }
 	    </script>
 	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB0Ip3If5_-0Mt5TObrCGBanY3wLzr4zQQ&callback=initMap"
 	    async defer></script>
