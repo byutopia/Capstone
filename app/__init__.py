@@ -31,7 +31,7 @@ def create_app(debug=False):
     def index():
         # If there isn't a logged on session, force them to login.
             if 'username' not in session:
-                return redirect(url_for('login'))
+                return render_template('index.html')
         # If someone tries to inject HTML into the session variable, reset it to the default. 
             if 'username' in session:
                 username_session = escape(session['username']).capitalize()
