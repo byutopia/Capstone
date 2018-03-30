@@ -19,23 +19,33 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header" style="float: none;">
             </div>
-	    <div style="font-family: BebasNeueBold; font-size: 4rem; padding-left: 55rem;" class="nav navbar-top-links navbar-left">Smart City Console</div>
+	    <!-- <div style="font-family: BebasNeueBold; font-size: 4rem; padding-left: 55rem;" class="nav navbar-top-links navbar-left">Smart City Console</div>-->
             <!-- /.navbar-header -->
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
-                Hello {{session['firstname']}}!
+		{%if 'username' in session%}
+		Hello {{session['firstname']}}!
+		{% endif %}
+		{%if 'username' not in session%}
+		Hello Guest! Please login.
+		{% endif %}
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                        </li>
-                    </ul>
+			{%if 'username' not in session%}
+			<li><a href="login"><i class="fa fa-sign-in fa-fw"></i> Login</a></li>
+			{% endif %}
+			{%if 'username' in session%}
+			<li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+                    	{% endif %}
+		    </ul>
                     <!-- /.dropdown-user -->
                 </li>
                 <!-- /.dropdown -->
             </ul>
+	    <div style="font-family: BebasNeueBold; font-size: 4rem; text-align: center; margin-left: 30rem;" class="nav navbar-top-links">Smart City Console</div>
             <!-- /.navbar-top-links -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -71,91 +81,6 @@
                             <a href="wago"><i class="fa fa-cube fa-fw"></i> Wago</a>
                         </li>
                         {%endif%}
-                        {%if 'camera' in session['roles']%}
-                        <li>
-                            <a href="camera"><i class="fa fa-camera  fa-fw"></i> Surveillance</a>
-                        </li>
-                        {%endif%}
-                        <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Website Documentation<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot">Flot Charts</a>
-                                </li>
-                                <li>
-                                    <a href="morris">Morris.js Charts</a>
-                                </li>
-                                <li>
-                                    <a href="forms"><i class="fa fa-edit fa-fw"></i> Forms</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-wrench fa-fw"></i> UI Elements<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li>
-                                            <a href="panels-wells">Panels and Wells</a>
-                                        </li>
-                                        <li>
-                                            <a href="buttons">Buttons</a>
-                                        </li>
-                                        <li>
-                                            <a href="notifications">Notifications</a>
-                                        </li>
-                                        <li>
-                                            <a href="typography">Typography</a>
-                                        </li>
-                                        <li>
-                                            <a href="icons"> Icons</a>
-                                        </li>
-                                        <li>
-                                            <a href="grid">Grid</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-second-level -->
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li>
-                                            <a href="#">Second Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Second Level Item</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Third Level <span class="fa arrow"></span></a>
-                                            <ul class="nav nav-third-level">
-                                                <li>
-                                                    <a href="#">Third Level Item</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Third Level Item</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Third Level Item</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Third Level Item</a>
-                                                </li>
-                                            </ul>
-                                            <!-- /.nav-third-level -->
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-second-level -->
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
-                                    <ul class="nav nav-second-level">
-                                        <li>
-                                            <a href="blank">Blank Page</a>
-                                        </li>
-                                        <li>
-                                            <a href="login">Login Page</a>
-                                        </li>
-                                    </ul>
-                                    <!-- /.nav-second-level -->
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
                         </li>
                     </ul>
                 </div>
