@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for
+from flask import Blueprint, request, render_template, session, redirect
 from ... import socketio
 
 wago_mod = Blueprint('wago', __name__)

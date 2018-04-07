@@ -5,7 +5,6 @@
 
 import MySQLdb
 import MySQLdb.cursors
-# from ... import _config # we could import this directly from the adjacent file, but standards
 from . import config as _config
 
 class Cursor(object):
