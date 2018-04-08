@@ -17,7 +17,6 @@
 }
 #StartStop{
     border-style: hidden;
-    /*background-color:white;*/
     align-content: center;
     text-align:center; 
     vertical-align:middle;
@@ -40,7 +39,6 @@ button.onOff{
     cursor: pointer;
 }
 div.status{
-	/*border-radius: 4px;*/
 	border: none;
     color: white;
     padding: 5px;
@@ -49,7 +47,6 @@ div.status{
     display: inline-block;
     font-size: 16px;
     margin: 4px 2px;
-    /*cursor: pointer;*/
     width: 21.5rem;
     opacity: 0.4;
     transition: opacity 0.7s linear;
@@ -76,9 +73,7 @@ td.title{
     text-align: center; 
 }
 th, td {
-    /*border: 1px solid #3D8BCD;*/
     text-align: left;
-    /*padding: 8px;*/
 }
 
 .programs tr:nth-child(even) {

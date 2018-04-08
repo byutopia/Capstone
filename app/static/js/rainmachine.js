@@ -4,7 +4,7 @@ function zoneStart(id) {
 	var data = {id: id};
 
 	fetch(url, {
-	  method: 'POST', // or 'PUT'
+	  method: 'POST',
 	  body: JSON.stringify(data),
 	  headers: new Headers({
 	    'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ function zoneStop(id) {
 	var data = {id: id};
 
 	fetch(url, {
-	  method: 'POST', // or 'PUT'
+	  method: 'POST',
 	  body: JSON.stringify(data),
 	  headers: new Headers({
 	    'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ function programStart(id) {
 	var data = {id: id};
 
 	fetch(url, {
-	  method: 'POST', // or 'PUT'
+	  method: 'POST',
 	  body: JSON.stringify(data),
 	  headers: new Headers({
 	    'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ function programStop(id) {
 	var data = {id: id};
 
 	fetch(url, {
-	  method: 'POST', // or 'PUT'
+	  method: 'POST',
 	  body: JSON.stringify(data),
 	  headers: new Headers({
 	    'Content-Type': 'application/json'
