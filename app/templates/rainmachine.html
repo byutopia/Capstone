@@ -87,7 +87,7 @@
                         <th class="title">Status</th>
                         <th class="title">Start Time</th>
                         <th class="title">Zones in Program</th>
-                        {% if '"rainmachine":"write"' not in session['roles'] %}
+                        {% if '"rainmachine":"write"' in session['roles'] %}
                         <th class="title">Start/Stop</th>
                         {%endif%}
                     </tr>
