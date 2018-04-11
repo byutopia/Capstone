@@ -170,13 +170,13 @@
 <!-- disables clicking if does not have write access to purpleair -->
 {% if '"purpleair":"write"' not in session['roles']  %}
     <script>
-        window.onload=function(){
-            document.getElementById('permissions').addEventListener("click",handler,true);
-            function handler(e){
-                e.stopPropagation();
-                e.preventDefault();
-            }          
-        }
+  //      window.onload=function(){
+  //          document.getElementById('permissions').addEventListener("click",handler,true);
+  //          function handler(e){
+  //              e.stopPropagation();
+  //              e.preventDefault();
+  //          }          
+  //      }
     </script>
 {%endif%}
 {% endblock %}
