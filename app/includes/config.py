@@ -39,7 +39,11 @@ purpleair = {
 rainmachine = {
     'address': '192.168.1.20',
     'email': 'salsahonor@gmail.com',
-    'pwd': 'strong password'
+    'pwd': 'strong password',
+    'weather': {
+        'url': 'https://forecast7.com/en/40d23n111d66/provo/?unit=us',
+        'data-label': 'PROVO UT'
+    }
 }
 
 app = {

@@ -6,12 +6,12 @@
             <img class="page-header" src="static/images/rainmachine.png">
             <title>Rainmachine</title>
             <div id="permissions">
+                {% if rainmachineInfo.success == 1 %}
                 <link rel="stylesheet" type="text/css" href="css/rainmachine.css">
-                <a class="weatherwidget-io" href="https://forecast7.com/en/40d23n111d66/provo/?unit=us" data-label_1="PROVO UT" data-label_2="WEATHER" data-theme="original" >PROVO UT WEATHER</a>
+                <a class="weatherwidget-io" href="{{ rainmachineInfo.data.weather.url }}" data-label_1="{{ rainmachineInfo.data.weather.data-label }}" data-label_2="WEATHER" data-theme="original" >{{ rainmachineInfo.data.weather.data-label }} WEATHER</a>
                 <script>
                     !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://weatherwidget.io/js/widget.min.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","weatherwidget-io-js");
                 </script>
-                {% if rainmachineInfo.success == 1 %}
                 <h3>Zones</h3>
                 {% for z in rainmachineInfo.data.zone.zones %}
                 <div class="card" id="card-{{z.uid}}">
