@@ -96,7 +96,7 @@
                         <!-- Prints name of Program -->
                         <td class="title">{{ p.name|e }}</td>
                         <!-- status of the program, running, not running, or broken -->
-                        <td class="title">{% if p.status == 0 %} Not Running {%elif p.status == 1%} Running {% else %} Queued{%endif%}</td>
+                        <td class="title state">{% if p.status == 0 %} Not Running {%elif p.status == 1%} Running {% else %} Queued{%endif%}</td>
                         <!-- The scheduled time for the Program to start -->
                         <td class="title">{{ p.startTime|e }}</td>
                         <!-- Whether or not the program is currently running -->

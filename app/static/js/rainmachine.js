@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 setTimeout(() => { socket.emit('getData') }, 3000);
             }
         } else if (msg.type === 'program') {
-            var stat = document.querySelector("#program-"+(msg.data.programID+1)+" .state");
+            var stat = document.querySelector("#program-"+(msg.data.programID)+" .state");
             if (msg.data.status === 'started') {
                 stat.textContent = "Running";
             } else if (msg.data.status === 'stopped') {
