@@ -42,7 +42,7 @@ rainmachine = {
     'pwd': 'strong password',
     'weather': {
         'url': 'https://forecast7.com/en/40d23n111d66/provo/?unit=us',
-        'data-label': 'PROVO UT'
+        'label': 'PROVO UT'
     }
 }
 
