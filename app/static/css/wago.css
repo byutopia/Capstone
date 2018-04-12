@@ -4,4 +4,9 @@
 
 .light {
     vertical-align: middle;
+    width: 30%;
+    height: auto;
+}
+body {
+    overflow-y: hidden;
 }
