@@ -2,65 +2,64 @@
 <html>
 <head>
 {% block head %}
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-<meta name="author" content="Allenh">
-<title>{% block title %}{% endblock %}Login - Smart City Console </title>
-<link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/metisMenu.min.css') }}">
-<link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/sb-admin-2.css') }}">
-<link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/font-awesome.min.css') }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>{% block title %}{% endblock %}Login - Smart City Console </title>
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/metisMenu.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/sb-admin-2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/font-awesome.min.css') }}">
 {% endblock %}
 </head>
 <body>
-	<a href="index"><button class="btn btn-lg btn-block" style="background-color: #DBDC00;">Back to Home</button></a>
-<div class="container">
+    <a href="index"><button class="btn btn-lg btn-block" style="background-color: #DBDC00;">Back to Home</button></a>
+    <div class="container">
         <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title" style="text-align:center;">Please Sign In</h3>
-                </div>
-                <div class="panel-body">
-			<img src="{{ url_for('serve_static_resource', resource='static/images/mainLogo.png')}}" style="width: 33rem;">
-			<br>
-			<br>
-		<!--Create a form that the user will enter their login information into. -->
-	  	<!--Assign IDs to the inputs and flag the form's method as POST to prepare it to pass the data. -->
-                    <form action="login" method="POST" style="text-align: center;">
-                        <fieldset>
-                            <div class="input-group" style="margin:auto;">
-                                <input class="form-control" placeholder="Username" name="username" id="user" type="text" autofocus>
-                            </div>
-                            <div class="input-group" style="margin: auto;">
-                                <input class="form-control" placeholder="Password" name="password" id="pass" type="password" value="">
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                </label>
-                            </div>
-                            <!-- Change this to a button or input when using this as a form -->
-                            <input type="Submit" value="Login" class="btn btn-lg btn-block" style="background-color: #DBDC00;"></input>
-                        </fieldset>
-                    </form>
-                </div>
-           </div>
-        </div>
-    </div>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div class="col-md-4 col-md-offset-5">
-                <ul class=flashes>
-                {% for category, message in messages %}
-                    <div class="{{category}}"> {{message}}</div>
-                {%endfor%}
-                </ul>
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" style="text-align:center;">Please Sign In</h3>
+                    </div>
+                    <div class="panel-body">
+                       	<img src="{{ url_for('serve_static_resource', resource='static/images/mainLogo.png')}}" style="width: 33rem;">
+                        <br>
+                        <br>
+                        <!--Create a form that the user will enter their login information into. -->
+                      	<!--Assign IDs to the inputs and flag the form's method as POST to prepare it to pass the data. -->
+                        <form action="login" method="POST" style="text-align: center;">
+                            <fieldset>
+                                <div class="input-group" style="margin:auto;">
+                                    <input class="form-control" placeholder="Username" name="username" id="user" type="text" autofocus>
+                                </div>
+                                <div class="input-group" style="margin: auto;">
+                                    <input class="form-control" placeholder="Password" name="password" id="pass" type="password" value="">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    </label>
+                                </div>
+                                <!-- Change this to a button or input when using this as a form -->
+                                <input type="Submit" value="Login" class="btn btn-lg btn-block" style="background-color: #DBDC00;"></input>
+                            </fieldset>
+                        </form>
+                    </div>
+               </div>
             </div>
-        {%endif%}
-     {%endwith%}
-</div>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="col-md-4 col-md-offset-5">
+                    <ul class=flashes>
+                    {% for category, message in messages %}
+                        <div class="{{category}}"> {{message}}</div>
+                    {%endfor%}
+                    </ul>
+                </div>
+            {%endif%}
+         {%endwith%}
+    </div>
 </body>
 </html>

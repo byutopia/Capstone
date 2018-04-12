@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
+    <meta name="description" content="Smart City Console">
     <title>{% block title %}{% endblock %} - Smart City Console</title>
     <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('serve_static_resource', resource='css/metisMenu.min.css') }}">
@@ -17,87 +17,90 @@
 <body>
     <div id="wrapper">
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header" style="float: none;">
-            </div>
-	    <!-- <div style="font-family: BebasNeueBold; font-size: 4rem; padding-left: 55rem;" class="nav navbar-top-links navbar-left">Smart City Console</div>-->
-            <!-- /.navbar-header -->
+            <div class="navbar-header" style="float: none;"></div>
             <ul class="nav navbar-top-links navbar-right">
-                <!-- /.dropdown -->
-		{%if 'username' in session%}
-		Hello {{session['firstname']}}!
-		{% endif %}
-		{%if 'username' not in session%}
-		Hello Guest! Please login.
-		{% endif %}
+    	    	{%if 'username' in session%}
+	            	Hello {{session['firstname']}}!
+		        {% endif %}
+    		    {%if 'username' not in session%}
+	    	        Hello Guest! Please login.
+    	    	{% endif %}
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-			{%if 'username' not in session%}
-			<li><a href="login"><i class="fa fa-sign-in fa-fw"></i> Login</a></li>
-			{% endif %}
-			{%if 'username' in session%}
-			<li><a href="logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
-                    	{% endif %}
-		    </ul>
-                    <!-- /.dropdown-user -->
+        			    {%if 'username' not in session%}
+	             	    <li>
+                            <a href="login">
+                                <i class="fa fa-sign-in fa-fw"></i> Login
+                            </a>
+                        </li>
+                        {% endif %}
+        			    {%if 'username' in session%}
+    		            <li>
+                            <a href="logout">
+                                <i class="fa fa-sign-out fa-fw"></i> Logout
+                            </a>
+                        </li>
+                        {% endif %}
+	    	        </ul>
                 </li>
-                <!-- /.dropdown -->
             </ul>
-	    <div style="font-family: BebasNeueBold; font-size: 4rem; text-align: center; margin-left: 30rem;" class="nav navbar-top-links">Smart City Console</div>
-            <!-- /.navbar-top-links -->
+    	    <div style="font-family: BebasNeueBold; font-size: 4rem; text-align: center; margin-left: 30rem;" class="nav navbar-top-links">Smart City Console</div>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
-                  <img src="{{ url_for('serve_static_resource', resource='static/images/mainLogo.png')}}" style="height: 10rem; padding-left: 6rem; width: 18rem;">
-                    <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
+                    <img src="{{ url_for('serve_static_resource', resource='static/images/mainLogo.png')}}" style="height: 10rem; padding-left: 6rem; width: 18rem;">
+                        <ul class="nav" id="side-menu">
+                            <li class="sidebar-search">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" placeholder="Search...">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </span>
+                                    </input>
+                                </div>
+                            </li>
                             <!-- Constrain the elements using the sessions -->
-			    <!-- If that user doesn't have that role assigned to them, the elements are locked and hidden. -->
-                        </li>
-                        <li>
-                            <a href="index"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                        </li>
-                        {%if 'rainmachine' in session['roles']%}
-                        <li>
-                            <a href="rainmachine"><i class="fa fa-tint fa-fw"></i> Rainmachine</a>
-                        </li>
-                        {%endif%}
-                        {%if 'purpleair' in session['roles']%}
-                        <li>
-                            <a href="purpleair"><i class="fa fa-cloud fa-fw"></i> Purpleair</a>
-                        </li>
-                        {%endif%}
-                        {%if 'wago' in session['roles']%}
-                        <li>
-                            <a href="wago"><i class="fa fa-cube fa-fw"></i> Wago</a>
-                        </li>
-                        {%endif%}
+        			        <!-- If that user doesn't have that role assigned to them, the elements are locked and hidden. -->
+                           <li>
+                               <a href="index"><i class="fa fa-dashboard fa-fw"></i> Home</a>
+                           </li>
+                           {%if 'rainmachine' in session['roles']%}
+                           <li>
+                               <a href="rainmachine"><i class="fa fa-tint fa-fw"></i> Rainmachine</a>
+                            </li>
+                            {%endif%}
+                            {%if 'purpleair' in session['roles']%}
+                            <li>
+                                <a href="purpleair"><i class="fa fa-cloud fa-fw"></i> Purpleair</a>
+                            </li>
+                            {%endif%}
+                            {%if 'wago' in session['roles']%}
+                            <li>
+                                <a href="wago"><i class="fa fa-cube fa-fw"></i> Wago</a>
+                            </li>
+                            {%endif%}
                         </li>
                     </ul>
                 </div>
-                <!-- /.sidebar-collapse -->
             </div>
-            <!-- /.navbar-static-side -->
         </nav>
         <div id="page-wrapper">
-            {% with messages = get_flashed_messages() %} {% if messages %}
-            <div class="container">>
+            {% with messages = get_flashed_messages() %} 
+            {% if messages %}
+            <div class="container">
                 <ul class="flashes">
                     {% for message in messages %}
                     <li>{{ message }}</li>
                     {% endfor %}
                 </ul>
             </div>
-            {% endif %} {% endwith %} {% block content %} {% endblock %}
+            {% endif %} 
+            {% endwith %} 
+            {% block content %} {% endblock %}
         </div>
     </div>
     {% block js %}

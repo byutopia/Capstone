@@ -4,7 +4,7 @@ function zoneStart(id) {
 	var data = {id: id};
 
 	fetch(url, {
-	  method: 'POST', // or 'PUT'
+	  method: 'POST',
 	  body: JSON.stringify(data),
 	  headers: new Headers({
 	    'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ function zoneStop(id) {
 	var data = {id: id};
 
 	fetch(url, {
-	  method: 'POST', // or 'PUT'
+	  method: 'POST',
 	  body: JSON.stringify(data),
 	  headers: new Headers({
 	    'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ function programStart(id) {
 	var data = {id: id};
 
 	fetch(url, {
-	  method: 'POST', // or 'PUT'
+	  method: 'POST',
 	  body: JSON.stringify(data),
 	  headers: new Headers({
 	    'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ function programStop(id) {
 	var data = {id: id};
 
 	fetch(url, {
-	  method: 'POST', // or 'PUT'
+	  method: 'POST',
 	  body: JSON.stringify(data),
 	  headers: new Headers({
 	    'Content-Type': 'application/json'
@@ -94,17 +94,12 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let z of data.zone.zones) { // iterate over zones
             let stat = document.querySelector("#card-"+z.uid+" .status");
             if (z.state == 1) { // if zone is running and isn't zone 1, make a timer
-                if (z.uid == 1) {
-                    stat.classList.add("active");
-                    stat.textContent = "Running";
-                } else {
-                    if (!timers["card-"+z.uid] || timers["card-"+z.uid] == 0) {
-                        stat.classList.add("active")
-                        timers["card-"+z.uid] = makeTimer(z.remaining, stat, () => { 
-                            timers["card-"+z.uid] = 0;
-                            socket.emit('getData'); 
-                        });
-                    }
+                if (!timers["card-"+z.uid] || timers["card-"+z.uid] == 0) {
+                    stat.classList.add("active")
+                    timers["card-"+z.uid] = makeTimer(z.remaining, stat, () => { 
+                        timers["card-"+z.uid] = 0;
+                        socket.emit('getData'); 
+                    });
                 }
             } else if (z.state == 2) { // if zone is queued to run, make card reflect that
                 stat.classList.add("active");
@@ -131,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 setTimeout(() => { socket.emit('getData') }, 3000);
             }
         } else if (msg.type === 'program') {
-            var stat = document.querySelector("#program-"+(msg.data.programID+1)+" .state");
+            var stat = document.querySelector("#program-"+(msg.data.programID)+" .state");
             if (msg.data.status === 'started') {
                 stat.textContent = "Running";
             } else if (msg.data.status === 'stopped') {

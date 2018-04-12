@@ -9,11 +9,11 @@ mysql = {
 
 purpleair = {
      'addresses': [
-  #      '192.168.20.93',
-   #     '192.168.20.61',
-    #    '192.168.20.59',
-     #   '192.168.20.120',
-      #  '192.168.20.76',
+       # '192.168.20.93',
+       # '192.168.20.61',
+       # '192.168.20.59',
+       # '192.168.20.120',
+       # '192.168.20.76',
        # '192.168.20.62',
        # '192.168.20.71',
        # '192.168.20.79',
@@ -37,9 +37,13 @@ purpleair = {
 }
 
 rainmachine = {
-    'address': '10.10.107.252',
+    'address': '192.168.1.20',
     'email': 'salsahonor@gmail.com',
-    'pwd': 'strong password'
+    'pwd': 'strong password',
+    'weather': {
+        'url': 'https://forecast7.com/en/40d23n111d66/provo/?unit=us',
+        'label': 'PROVO UT'
+    }
 }
 
 app = {
