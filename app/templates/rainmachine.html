@@ -70,9 +70,11 @@
                                 {% endfor %}
                         <div class="status" style="background-color: #0964B2;">Inactive</div><br>
                         <!-- Button to start watering the zone for 5 mins -->
+                        {%if '"rainmachine":"write"'in session['roles']%}
                         <button class="onOff" id="start" value="{{ z.uid }}" style="background-color: #8FC470;" onclick="zoneStart({{z.uid}})">start</button>
                         <!-- Button to stop watering zone -->
                         <button class="onOff" id="stop" value="{{ z.uid }}" style="background-color: #DB524C;" onclick="zoneStop({{z.uid}})">stop</button>
+                        {%endif%}
                     </div>
                 </div>
                 {% endfor %}
@@ -85,7 +87,9 @@
                         <th class="title">Status</th>
                         <th class="title">Start Time</th>
                         <th class="title">Zones in Program</th>
+                        {% if '"rainmachine":"write"' in session['roles'] %}
                         <th class="title">Start/Stop</th>
+                        {%endif%}
                     </tr>
                     {% for p in rainmachineInfo.data.program.programs %}
                     <tr id="program-{{p.uid}}">
@@ -98,10 +102,12 @@
                         <!-- Whether or not the program is currently running -->
                         <td class="title">{% for n in p.wateringTimes %} {%if n.active == true%} {{n.name|e}} <div>{% else %} {% endif %}{% endfor %}</td>
                         <!-- the buttons that trigger the Start and Stop POST requests, sends id of program to post function -->
+                        {% if '"rainmachine":"write"' in session['roles'] %}
                         <td id="StartStop">
                             <button class="onOff" id="start" value="{{ p.uid }}" style="background-color: #8FC470;" onclick="programStart({{p.uid}})">start</button>
                             <button class="onOff" id="stop" value="{{ p.uid }}" style="background-color: #DB524C;" onclick="programStop({{p.uid}})">stop</button>
                         </td>
+                        {%endif%}
                     </tr>
                     {% endfor %}
                 </table>
@@ -114,8 +120,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.slim.js"></script>
         <script src="{{ url_for('serve_static_resource', resource='js/rainmachine.js') }}"></script>
         <!-- disables click if user does not have write access-->
-        {%if '"rainmachine":"write"' not in session['roles']%}
-        <script>
+       {%if '"rainmachine":"write"' not in session['roles']%}
+       <script>
         window.onload= function(){
             document.getElementById('permissions').addEventListener("click",handler,true);
             function handler(e){
