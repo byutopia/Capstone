@@ -2,6 +2,7 @@ import requests
 import json
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for
 from ... import socketio
+from ... import _config
 
 from API import API
 
@@ -64,6 +65,7 @@ def rainmachine():
         return redirect(url_for('index'))
     data = get_all()
     if type(data) == dict:
+        data['weather'] = _config.rainmachine['weather']
         return render_template("rainmachine.html", rainmachineInfo = {'success': 1, 'data': data})
     else: 
         return render_template("rainmachine.html", rainmachineInfo = {'success': 0, 'data': "Error reading API response"})
